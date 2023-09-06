@@ -83,7 +83,10 @@ export function SidebarNavigation() {
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              onClick={() => alert("Support")}
+              onClick={() => {
+                window.location.href =
+                  "mailto:profysupport@profy.dev?subject=Support&body=message%20goes%20here";
+              }}
             />
             <MenuItemButton
               text="Collapse"
