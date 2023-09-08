@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type NavigationContextProviderProps = {
   children: React.ReactNode;
@@ -18,6 +18,16 @@ export function NavigationProvider({
   const [isSidebarCollapsed, setSidebarCollapsed] = useState(
     defaultContext.isSidebarCollapsed,
   );
+
+  useEffect(() => {
+    function detectWindowSize() {
+      if (window.innerWidth < 1024) setSidebarCollapsed(false);
+    }
+    window.addEventListener("resize", detectWindowSize);
+    return () => {
+      window.removeEventListener("resize", detectWindowSize);
+    };
+  }, []);
 
   return (
     <NavigationContext.Provider
