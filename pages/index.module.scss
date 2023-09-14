@@ -1,5 +1,9 @@
+@use "@styles/color";
+@use "@styles/font";
+
 .header {
-  width: 100%;
+  width: min(89%, 80rem);
+  margin: 0 auto;
   height: 80px;
   padding: 0 2rem;
   box-sizing: border-box;
@@ -7,6 +11,31 @@
   justify-content: space-between;
   align-items: center;
   background: white;
+}
+
+.navLinks {
+  ul {
+    list-style-type: none;
+    display: flex;
+    padding-left: 2.9rem;
+    gap: 2rem;
+  }
+
+  ul li a {
+    text-decoration: none;
+    color: color.$gray-600;
+    font: font.$text-md-medium;
+  }
+}
+
+.dashboardLink {
+  width: 10.3rem;
+  background-color: color.$primary-600;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 8px;
+  padding: 0.8em 0;
 }
 
 .contactButton {
