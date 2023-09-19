@@ -40,3 +40,48 @@ describe("Project List", () => {
     });
   });
 });
+
+describe("Project list - Error", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/dashboard");
+  });
+  it("error message displayed on failed request", () => {
+    // intercept request with error
+    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+      body: {},
+      statusCode: 400,
+    }).as("getProjectsWithError");
+
+    cy.wait(7000);
+
+    cy.get("main").contains(
+      "There was a problem while loading the project data",
+    );
+  });
+
+  it("data is successfully retrieved after inital error, data is displayed", () => {
+    // intercept request with error
+    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+      body: {},
+      statusCode: 400,
+    }).as("getProjectsWithError");
+
+    cy.wait(7000);
+
+    cy.get("main").contains(
+      "There was a problem while loading the project data",
+    );
+
+    // intercept request with data
+    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+      fixture: "projects.json",
+    }).as("getProjects");
+
+    cy.get("main").contains("Try again").click();
+
+    cy.wait("@getProjects");
+
+    // check that data is displayed
+    cy.get("main").find("li").should("have.length", 3);
+  });
+});
