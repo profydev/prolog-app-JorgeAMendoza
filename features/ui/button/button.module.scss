@@ -1,3 +1,7 @@
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
+
 .button {
   cursor: pointer;
 
@@ -14,5 +18,38 @@
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
+  }
+
+  &.sm {
+    font: font.$text-xs-medium;
+  }
+
+  &.md {
+    font: font.$text-sm-medium;
+  }
+
+  &.primary {
+    color: #fff;
+    background-color: color.$primary-500;
+    border: 1px solid color.$primary-500;
+  }
+
+  &.error {
+    color: #fff;
+    background-color: color.$error-600;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: color.$error-700;
+    }
+
+    &:focus {
+      // use a box shadow!
+      box-shadow: 0 0 0 3px color.$error-100;
+    }
+
+    &[disabled="true"] {
+      background-color: color.$error-200;
+    }
   }
 }
