@@ -1,1 +1,1 @@
-export { Loading } from "./Loading";
+export { Loading, LoadingSize } from "./Loading";
