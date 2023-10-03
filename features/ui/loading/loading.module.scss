@@ -1,0 +1,78 @@
+@use "@styles/color";
+
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  background-color: transparent;
+  border: 6px solid color.$primary-50;
+  border-radius: 100%;
+  border-left: 6px solid color.$primary-700;
+  aspect-ratio: 1/1;
+  animation: 1s linear infinite loading-spin;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: color.$primary-700;
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    left: 1px;
+  }
+
+  &.sm {
+    width: 3.2rem;
+
+    &::before {
+      top: 4px;
+    }
+
+    &::after {
+      bottom: 4px;
+    }
+  }
+
+  &.md {
+    width: 6.4rem;
+
+    &::before,
+    &::after {
+      left: 11px;
+    }
+
+    &::before {
+      top: 9px;
+    }
+
+    &::after {
+      bottom: 9px;
+    }
+  }
+
+  &.lg {
+    width: 9.6rem;
+
+    &::before,
+    &::after {
+      left: 18px;
+    }
+
+    &::before {
+      top: 17px;
+    }
+
+    &::after {
+      bottom: 17px;
+    }
+  }
+}

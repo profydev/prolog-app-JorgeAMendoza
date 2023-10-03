@@ -11,7 +11,8 @@ describe("Project List", () => {
     // open projects page
     cy.visit("http://localhost:3000/dashboard");
 
-    // wait for request to resolve
+    // wait for request to resolve and loading indicator to disappear
+    cy.get('[data-testid="loading"]');
     cy.wait("@getProjects");
   });
 
