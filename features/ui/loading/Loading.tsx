@@ -12,5 +12,10 @@ type LoadingProps = {
 };
 
 export const Loading = ({ size = LoadingSize.md }: LoadingProps) => {
-  return <div className={classNames(style.loading, style[size])}></div>;
+  return (
+    <div
+      data-testid="loading"
+      className={classNames(style.loading, style[size])}
+    ></div>
+  );
 };
