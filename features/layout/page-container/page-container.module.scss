@@ -5,8 +5,8 @@
 @use "@styles/misc";
 
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   background: color.$gray-900;
 
   @media (min-width: breakpoint.$desktop) {

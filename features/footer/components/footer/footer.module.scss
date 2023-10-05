@@ -1,0 +1,40 @@
+@use "@styles/color";
+@use "@styles/font";
+@use "@styles/space";
+
+.footer {
+  background-color: color.$gray-50;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  padding: space.$s6 0;
+}
+
+.version {
+  font: font.$text-md-regular;
+  color: color.$gray-400;
+  margin: 0;
+}
+
+.nav {
+  ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.55rem;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  li a {
+    font: font.$text-md-regular;
+    color: color.$gray-500;
+    text-decoration: none;
+  }
+}
+
+.logo {
+  width: 1.438rem;
+}
