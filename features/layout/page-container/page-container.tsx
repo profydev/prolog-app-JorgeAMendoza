@@ -21,17 +21,20 @@ export function PageContainer({ children, title, info }: PageContainerProps) {
       </Head>
 
       <div className={styles.container}>
-        <SidebarNavigation />
+        <div className={styles.sidebarContainer}>
+          <SidebarNavigation />
+        </div>
+
         <main className={styles.main}>
           <div className={styles.contentContainer}>
             <h1 className={styles.title}>{title}</h1>
             <div className={styles.info}>{info}</div>
             {children}
           </div>
+          <div className={styles.footerContainer}>
+            <Footer />
+          </div>
         </main>
-        <div>
-          <Footer />
-        </div>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ export const Footer = () => {
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/icons/logo-small.svg" alt="" className={style.logo} />
 
-      <p className={style.version}>Version {publicRuntimeConfig?.version}</p>
+      <p className={style.version}>Version: {publicRuntimeConfig?.version}</p>
     </footer>
   );
 };
