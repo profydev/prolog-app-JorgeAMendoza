@@ -30,7 +30,7 @@ describe("Project List", () => {
       };
 
       // get all project cards
-      cy.get("main")
+      cy.get("[data-testid='project-list']")
         .find("li")
         .each(($el, index) => {
           const status =
@@ -95,6 +95,6 @@ describe("Project list - Error", () => {
     cy.wait("@getProjects");
 
     // check that data is displayed
-    cy.get("main").find("li").should("have.length", 3);
+    cy.get('[data-testid="project-list"]').find("li").should("have.length", 3);
   });
 });

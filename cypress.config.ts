@@ -1,4 +1,5 @@
 import { defineConfig } from "cypress";
+import { version } from "./package.json";
 
 export default defineConfig({
   retries: {
@@ -6,7 +7,7 @@ export default defineConfig({
     openMode: 1,
   },
   env: {
-    version: process.env.npm_package_version,
+    version,
   },
   e2e: {
     setupNodeEvents() {
