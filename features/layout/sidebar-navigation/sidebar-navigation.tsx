@@ -67,6 +67,7 @@ export function SidebarNavigation() {
             styles.nav,
             isMobileMenuOpen && styles.isMobileMenuOpen,
           )}
+          data-testid="sidebar-navigation"
         >
           <ul className={styles.linkList}>
             {menuItems.map((menuItem, index) => (
