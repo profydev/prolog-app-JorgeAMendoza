@@ -1,6 +1,7 @@
 describe("Sidebar Navigation", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/dashboard");
+    cy.get('[data-testid="sidebar-navigation"]').as("sidebarNavigation");
   });
 
   context("desktop resolution", () => {
@@ -41,14 +42,18 @@ describe("Sidebar Navigation", () => {
 
     it("is collapsible", () => {
       // collapse navigation
-      cy.get("nav").contains("Collapse").click();
+      cy.get("@sidebarNavigation").contains("Collapse").click();
 
       // check that links still exist and are functionable
-      cy.get("nav").find("a").should("have.length", 6).eq(1).click();
+      cy.get("@sidebarNavigation")
+        .find("a")
+        .should("have.length", 6)
+        .eq(1)
+        .click();
       cy.url().should("eq", "http://localhost:3000/dashboard/issues");
 
       // check that text is not rendered
-      cy.get("nav").contains("Issues").should("not.exist");
+      cy.get("@sidebarNavigation").contains("Issues").should("not.exist");
     });
   });
 
@@ -78,26 +83,61 @@ describe("Sidebar Navigation", () => {
     it("toggles sidebar navigation by clicking the menu icon", () => {
       // wait for animation to finish
       cy.wait(500);
-      isNotInViewport("nav");
+      isNotInViewport("@sidebarNavigation");
 
       // open mobile navigation
       cy.get("img[alt='open menu']").click();
 
       // wait for animation to finish
       cy.wait(500);
-      isInViewport("nav");
+      isInViewport("@sidebarNavigation");
 
       // check that all links are rendered
-      cy.get("nav").find("a").should("have.length", 6);
+      cy.get("@sidebarNavigation").find("a").should("have.length", 6);
 
       // Support link should be rendered but Collapse button not
-      cy.get("nav").contains("Support").should("exist");
-      cy.get("nav").contains("Collapse").should("not.be.visible");
+      cy.get("@sidebarNavigation").contains("Support").should("exist");
+      cy.get("@sidebarNavigation")
+        .contains("Collapse")
+        .should("not.be.visible");
 
       // close mobile navigation and check that it disappears
       cy.get("img[alt='close menu']").click();
       cy.wait(500);
-      isNotInViewport("nav");
+      isNotInViewport("@sidebarNavigation");
     });
+  });
+});
+
+describe("footer navigation", () => {
+  beforeEach(() => {
+    cy.visit("http://localhost:3000/dashboard");
+    cy.viewport(1025, 900);
+    cy.get("footer").as("prologFooter");
+  });
+
+  it("renders the current version of the application", () => {
+    const version = Cypress.env("version");
+    cy.get("@prologFooter").contains(`Version: ${version}`);
+  });
+
+  it("renders the correct links", () => {
+    cy.get("@prologFooter").find("ul").as("footerNav");
+
+    cy.get("@footerNav").find("li").should("have.length", 4);
+
+    cy.get("@footerNav").contains("Docs").should("have.attr", "href", "#");
+
+    cy.get("@footerNav").contains("API").should("have.attr", "href", "#");
+
+    cy.get("@footerNav").contains("Help").should("have.attr", "href", "#");
+
+    cy.get("@footerNav").contains("Community").should("have.attr", "href", "#");
+  });
+
+  it("prolog logo renders", () => {
+    cy.get("@prologFooter")
+      .find("img")
+      .should("have.attr", "src", "/icons/logo-small.svg");
   });
 });
