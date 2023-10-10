@@ -11,7 +11,8 @@ describe("Project List", () => {
     // open projects page
     cy.visit("http://localhost:3000/dashboard");
 
-    // wait for request to resolve
+    // wait for request to resolve and loading indicator to disappear
+    cy.get('[data-testid="loading"]');
     cy.wait("@getProjects");
   });
 
@@ -22,17 +23,29 @@ describe("Project List", () => {
 
     it("renders the projects", () => {
       const languageNames = ["React", "Node.js", "Python"];
+      const statusNames = {
+        info: "stable",
+        warning: "warning",
+        error: "critical",
+      };
 
       // get all project cards
-      cy.get("main")
+      cy.get("[data-testid='project-list']")
         .find("li")
         .each(($el, index) => {
+          const status =
+            mockProjects[index].status === "info"
+              ? statusNames.info
+              : mockProjects[index].status === "warning"
+              ? statusNames.warning
+              : statusNames.error;
+
           // check that project data is rendered
           cy.wrap($el).contains(mockProjects[index].name);
           cy.wrap($el).contains(languageNames[index]);
           cy.wrap($el).contains(mockProjects[index].numIssues);
           cy.wrap($el).contains(mockProjects[index].numEvents24h);
-          cy.wrap($el).contains(capitalize(mockProjects[index].status));
+          cy.wrap($el).contains(capitalize(status));
           cy.wrap($el)
             .find("a")
             .should("have.attr", "href", "/dashboard/issues");
@@ -82,6 +95,6 @@ describe("Project list - Error", () => {
     cy.wait("@getProjects");
 
     // check that data is displayed
-    cy.get("main").find("li").should("have.length", 3);
+    cy.get('[data-testid="project-list"]').find("li").should("have.length", 3);
   });
 });
