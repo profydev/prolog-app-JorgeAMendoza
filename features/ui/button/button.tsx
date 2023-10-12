@@ -8,7 +8,7 @@ export enum ButtonColor {
   secondary = "secondary",
   gray = "gray",
   empty = "empty",
-  emptyGray = "emptyGray",
+  emptyGray = "empty-gray",
 }
 
 export enum ButtonSize {

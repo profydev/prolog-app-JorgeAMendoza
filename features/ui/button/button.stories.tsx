@@ -8,6 +8,7 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
+  tags: ["autodocs"],
 } as Meta<typeof Button>;
 
 const Template: StoryFn<typeof Button> = ({ size, color, children }) => (
@@ -18,12 +19,44 @@ const Template: StoryFn<typeof Button> = ({ size, color, children }) => (
   </div>
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const Primary = Template.bind({});
+Primary.args = {
   size: ButtonSize.sm,
   color: ButtonColor.primary,
   children: "Button CTA",
 };
-Default.parameters = {
-  viewMode: "docs",
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  size: ButtonSize.sm,
+  color: ButtonColor.secondary,
+  children: "Button CTA",
+};
+
+export const Gray = Template.bind({});
+Gray.args = {
+  size: ButtonSize.sm,
+  color: ButtonColor.gray,
+  children: "Button CTA",
+};
+
+export const Empty = Template.bind({});
+Empty.args = {
+  size: ButtonSize.sm,
+  color: ButtonColor.empty,
+  children: "Button CTA",
+};
+
+export const EmptyGray = Template.bind({});
+EmptyGray.args = {
+  size: ButtonSize.sm,
+  color: ButtonColor.emptyGray,
+  children: "Button CTA",
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  size: ButtonSize.sm,
+  color: ButtonColor.error,
+  children: "Button CTA",
 };
