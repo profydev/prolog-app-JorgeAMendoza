@@ -18,24 +18,34 @@ export enum ButtonSize {
   xlg = "xlg",
 }
 
+export enum ButtonIcon {
+  none = "none",
+  only = "only",
+  trailing = "trailing",
+  leading = "leading",
+}
+
 type ButtonProps = {
   color?: ButtonColor;
   size?: ButtonSize;
+  icon?: ButtonIcon;
 };
 
 export function Button(
   props: ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps,
 ) {
-  const { color, size, ...buttonProps } = props;
+  const { color, size, icon, ...buttonProps } = props;
   const buttonColor = color === undefined ? ButtonColor.primary : color;
   const buttonSize = size === undefined ? ButtonSize.md : size;
-  console.log(buttonColor);
+  const buttonIcon = icon === undefined ? ButtonIcon.none : icon;
+
   return (
     <button
       className={classNames(
         styles.button,
         styles[buttonColor],
         styles[buttonSize],
+        styles[buttonIcon],
       )}
       {...buttonProps}
     />

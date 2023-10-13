@@ -21,6 +21,11 @@
     padding: 0;
   }
 
+  p {
+    margin: 0;
+  }
+
+  // Button Size
   &.sm {
     font: font.$text-sm-medium;
     padding: 0.5rem 0.75rem;
@@ -63,6 +68,7 @@
     }
   }
 
+  // Button Color
   &.secondary {
     color: color.$primary-700;
     background-color: color.$primary-50;
@@ -166,6 +172,35 @@
       background-color: color.$error-200;
       border: 1px solid color.$error-200;
       box-shadow: none;
+    }
+  }
+
+  // Button Icon
+  &.only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.leading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+      order: -1;
+    }
+  }
+
+  &.trailing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+      order: 1;
     }
   }
 }
