@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "@features/ui";
 import classNames from "classnames";
-import styles from "./menu-item-link.module.scss";
+import styles from "./menu-item-button.module.scss";
+import { Button, ButtonIcon } from "@features/ui";
 
 type MenuItemProps = {
   className?: string;
@@ -20,7 +20,12 @@ export function MenuItemButton({
 }: MenuItemProps) {
   return (
     <li className={classNames(styles.listItem, className)}>
-      <Button className={styles.anchor} onClick={onClick}>
+      <Button
+        type="button"
+        className={styles["sidebar-button"]}
+        onClick={onClick}
+        icon={ButtonIcon.leading}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className={styles.icon}

@@ -1,6 +1,8 @@
-.button {
-  cursor: pointer;
+@use "@styles/color";
+@use "@styles/space";
+@use "@styles/font";
 
+.button {
   /* remove default button styles */
   border: none;
   margin: 0;
@@ -10,9 +12,195 @@
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   appearance: none;
+  outline: transparent;
+  cursor: pointer;
+  border-radius: 8px;
 
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  // Button Size
+  &.sm {
+    font: font.$text-sm-medium;
+    padding: 0.5rem 0.75rem;
+  }
+
+  &.md {
+    font: font.$text-sm-medium;
+    padding: 0.625rem 1rem;
+  }
+
+  &.lg {
+    font: font.$text-md-medium;
+    padding: 0.625rem 1.125rem;
+  }
+
+  &.xlg {
+    font: font.$text-md-medium;
+    padding: 0.75rem 1.25rem;
+  }
+
+  &.primary {
+    color: #fff;
+    background-color: color.$primary-600;
+    border: 1px solid color.$primary-600;
+
+    &:hover {
+      background-color: color.$primary-700;
+      border: 1px solid color.$primary-700;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 4px color.$primary-100;
+    }
+
+    &:disabled {
+      cursor: default;
+      background-color: color.$primary-600;
+      box-shadow: none;
+      opacity: 0.2;
+    }
+  }
+
+  // Button Color
+  &.secondary {
+    color: color.$primary-700;
+    background-color: color.$primary-50;
+    border: 1px solid color.$primary-50;
+
+    &:hover {
+      background-color: color.$primary-100;
+      border: 1px solid color.$primary-100;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 4px color.$primary-100;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: color.$primary-300;
+      background-color: color.$primary-25;
+      border: 1px solid color.$primary-25;
+      box-shadow: none;
+    }
+  }
+
+  &.gray {
+    color: color.$gray-700;
+    border: 1px solid color.$gray-300;
+    background-color: #fff;
+
+    &:hover {
+      background-color: color.$gray-50;
+      color: color.$gray-800;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 4px color.$gray-100;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: color.$gray-300;
+      border: 1px solid color.$gray-200;
+      box-shadow: none;
+    }
+  }
+
+  &.empty {
+    background-color: transparent;
+    color: color.$primary-700;
+
+    &:hover {
+      background-color: color.$primary-50;
+    }
+
+    &:focus {
+      color: color.$primary-700;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: color.$gray-300;
+      background-color: transparent;
+    }
+  }
+
+  &.empty-gray {
+    color: color.$gray-500;
+    background-color: transparent;
+
+    &:hover {
+      background-color: color.$gray-50;
+      color: color.$gray-600;
+    }
+
+    &:focus {
+      color: color.$gray-500;
+    }
+
+    &:disabled {
+      cursor: default;
+      color: color.$gray-300;
+      background-color: transparent;
+    }
+  }
+
+  &.error {
+    color: #fff;
+    background-color: color.$error-600;
+    border: 1px solid color.$error-600;
+
+    &:hover {
+      background-color: color.$error-700;
+      border: 1px solid color.$error-700;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 4px color.$error-100;
+    }
+
+    &:disabled {
+      cursor: default;
+      background-color: color.$error-200;
+      border: 1px solid color.$error-200;
+      box-shadow: none;
+    }
+  }
+
+  // Button Icon
+  &.only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.leading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+      order: -1;
+    }
+  }
+
+  &.trailing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+      order: 1;
+    }
   }
 }
