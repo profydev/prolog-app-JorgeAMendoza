@@ -1,5 +1,7 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
+import { useState } from "react";
+import { ContactModal } from "@features/ui";
 
 const navigationItems = [
   { text: "Home", link: Routes.home },
@@ -9,8 +11,9 @@ const navigationItems = [
 ];
 
 const IssuesPage = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
-    <div>
+    <div className={styles.index} data-cover={showModal}>
       <header className={styles.header}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
@@ -31,15 +34,18 @@ const IssuesPage = () => {
       </header>
       <button
         className={styles.contactButton}
-        onClick={() =>
-          alert(
-            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal",
-          )
-        }
+        onClick={() => setShowModal(true)}
+        data-testid="supportButton"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/message.svg" alt="Contact" />
       </button>
+
+      {showModal ? (
+        <div className={styles.modalContainter}>
+          <ContactModal closeModal={() => setShowModal(false)} />
+        </div>
+      ) : null}
     </div>
   );
 };

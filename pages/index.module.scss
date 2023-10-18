@@ -1,6 +1,26 @@
 @use "@styles/color";
 @use "@styles/font";
 
+.index {
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+}
+
+.index[data-cover="true"]::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #34405499;
+
+  // filter: blur(10px);
+  backdrop-filter: (5px);
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+}
+
 .header {
   width: min(89%, 80rem);
   margin: 0 auto;
@@ -52,4 +72,12 @@
   &:hover {
     background: #6941c6;
   }
+}
+
+.modalContainter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
