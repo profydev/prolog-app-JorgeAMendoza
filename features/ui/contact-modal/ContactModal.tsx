@@ -10,15 +10,15 @@ export const ContactModal = ({ closeModal }: ContactModalProps) => {
   return (
     <div className={style.contactModal} data-testid="supportModal">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/icons/mail.svg" alt="" />
+      <img src="/icons/mail.svg" alt="" className={style.icon} />
 
-      <p>Contact Us Via Mail</p>
-      <p>
+      <p className={style.title}>Contact Us Via EMail</p>
+      <p className={style.desc}>
         Any questions? Send us an email at prolog@profy.dev. We usually answer
         within 24 hours.
       </p>
 
-      <div>
+      <div className={style.buttons}>
         <Button color={ButtonColor.gray} onClick={() => closeModal()}>
           Cancel
         </Button>

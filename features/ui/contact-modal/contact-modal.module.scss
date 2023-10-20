@@ -1,3 +1,53 @@
+@use "@styles/font";
+@use "@styles/color";
+@use "@styles/space";
+
 .contactModal {
-  width: min(90%, 40rem);
+  width: min(90%, 25rem);
+  height: 18rem;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.title {
+  font: font.$text-md-medium;
+  font-size: 1.125rem;
+}
+
+.desc {
+  font: font.$text-sm-regular;
+  margin-block-start: -0.5rem;
+}
+
+.buttons {
+  display: flex;
+  margin-top: auto;
+  gap: 0.9rem;
+  margin-block-start: 2rem;
+}
+
+.buttons > *:first-child {
+  font: font.$text-md-medium;
+  flex: 1;
+}
+
+.buttons > *:last-child {
+  background-color: color.$primary-700;
+  border-radius: 8px;
+  padding: 0.625rem space.$s4;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex: 1;
 }
