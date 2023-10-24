@@ -66,7 +66,7 @@ const IssuesPage = () => {
         </a>
       </header>
       <main>
-        <section id="hero">
+        <section id="hero" aria-label="company hero introduction">
           <h1>Your Issues In Sight. At All Times.</h1>
           <p>
             Powerful error tracking and monitoring for software applications.
