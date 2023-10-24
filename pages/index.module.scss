@@ -2,29 +2,51 @@
 @use "@styles/font";
 
 .header {
-  width: min(89%, 80rem);
+  width: min(91%, 80rem);
   margin: 0 auto;
   height: 80px;
-  padding: 0 2rem;
+
+  // padding: 0 2rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
+  position: relative;
+}
+
+.header button {
+  background-color: transparent;
+  border: none;
 }
 
 .navLinks {
+  position: absolute;
+  bottom: -227px;
+  background-color: white;
+  border: 1px solid color.$gray-300;
+  border-radius: 5px;
+  width: 100%;
+  visibility: hidden;
+
   ul {
     list-style-type: none;
     display: flex;
+    flex-direction: column;
     padding-left: 2.9rem;
     gap: 2rem;
+
+    // display: none;
   }
 
   ul li a {
     text-decoration: none;
     color: color.$gray-600;
     font: font.$text-md-medium;
+  }
+
+  &[aria-hidden="false"] {
+    visibility: visible;
   }
 }
 
@@ -36,6 +58,17 @@
   text-align: center;
   border-radius: 8px;
   padding: 0.8em 0;
+  display: none;
+}
+
+// hero banner
+.hero {
+  width: min(89%, 80rem);
+  margin: 0 auto;
+}
+
+.hero img {
+  width: 100%;
 }
 
 .contactButton {

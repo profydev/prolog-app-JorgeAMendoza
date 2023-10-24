@@ -1,6 +1,7 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
 import Image from "next/image";
+import { useState } from "react";
 
 const navigationItems = [
   { text: "Home", link: Routes.home },
@@ -45,12 +46,25 @@ const customerList = [
 ];
 
 const IssuesPage = () => {
+  const [navOpen, setNavOpen] = useState(false);
   return (
     <div>
       <header className={styles.header}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
-        <nav className={styles.navLinks}>
+        <button
+          aria-label="click to open or close the menu open"
+          aria-controls="home-navigation"
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/icons/nav-menu.svg" alt="menu" />
+        </button>
+        <nav
+          className={styles.navLinks}
+          aria-hidden={navOpen === true ? false : true}
+          id="home-navigation"
+        >
           <ul>
             {navigationItems.map((item) => {
               return (
@@ -61,12 +75,17 @@ const IssuesPage = () => {
             })}
           </ul>
         </nav>
+
         <a href={Routes.projects} className={styles.dashboardLink}>
           Open Dashboard
         </a>
       </header>
       <main>
-        <section id="hero" aria-label="company hero introduction">
+        <section
+          id="hero"
+          aria-label="company hero introduction"
+          className={styles.hero}
+        >
           <h1>Your Issues In Sight. At All Times.</h1>
           <p>
             Powerful error tracking and monitoring for software applications.
