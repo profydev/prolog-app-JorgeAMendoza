@@ -36,6 +36,8 @@ const IssuesPage = () => {
         className={styles.contactButton}
         onClick={() => setShowModal(true)}
         data-testid="supportButton"
+        aria-label="click to open the contact modal"
+        aria-controls="support-modal"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/message.svg" alt="Contact" />
