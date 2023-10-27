@@ -8,6 +8,7 @@ const navigationItems = [
   { text: "Products", link: Routes.products },
   { text: "Documentation", link: Routes.documentation },
   { text: "Pricing", link: Routes.pricing },
+  { text: "Dashboard", link: Routes.projects },
 ];
 
 const companyList = [
@@ -55,6 +56,7 @@ const IssuesPage = () => {
         <button
           aria-label="click to open or close the menu open"
           aria-controls="home-navigation"
+          aria-expanded={navOpen === true ? true : false}
           onClick={() => setNavOpen(!navOpen)}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
