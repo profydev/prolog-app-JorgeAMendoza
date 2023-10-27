@@ -1,7 +1,7 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const navigationItems = [
   { text: "Home", link: Routes.home },
@@ -48,6 +48,16 @@ const customerList = [
 
 const IssuesPage = () => {
   const [navOpen, setNavOpen] = useState(false);
+
+  // use effect to lock and add scroll when nav is open.
+  useEffect(() => {
+    if (navOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [navOpen]);
+
   return (
     <div>
       <header className={styles.header}>
