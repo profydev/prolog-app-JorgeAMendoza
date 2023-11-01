@@ -2,6 +2,7 @@ import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import useIsMobile from "../hooks/useIsMobile";
 
 const navigationItems = [
   { text: "Home", link: Routes.home },
@@ -49,15 +50,15 @@ const customerList = [
 
 const IssuesPage = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const isMobile = useIsMobile();
 
-  // use effect to lock and add scroll when nav is open.
   useEffect(() => {
-    if (navOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
+    if (isMobile) setNavOpen(false);
+    else {
+      setNavOpen(true);
       document.body.style.overflow = "unset";
     }
-  }, [navOpen]);
+  }, [isMobile]);
 
   return (
     <div>
@@ -65,10 +66,18 @@ const IssuesPage = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
         <button
-          aria-label="click to open or close the menu open"
+          aria-label={`click to ${navOpen === true ? "close" : "open"} menu}`}
           aria-controls="home-navigation"
           aria-expanded={navOpen === true ? true : false}
-          onClick={() => setNavOpen(!navOpen)}
+          onClick={() => {
+            if (navOpen === true) {
+              setNavOpen(false);
+              document.body.style.overflow = "unset";
+            } else {
+              setNavOpen(true);
+              document.body.style.overflow = "hidden";
+            }
+          }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/icons/nav-menu.svg" alt="menu" />
@@ -77,6 +86,7 @@ const IssuesPage = () => {
           className={styles.navLinks}
           aria-hidden={navOpen === true ? false : true}
           id="home-navigation"
+          aria-label="navigation links for the home page"
         >
           <ul>
             {navigationItems.map((item) => {

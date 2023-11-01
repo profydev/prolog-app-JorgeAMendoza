@@ -67,7 +67,7 @@
 }
 
 .dashboardLink {
-  width: 10.3rem;
+  min-width: 10.3rem;
   background-color: color.$primary-600;
   color: #fff;
   text-decoration: none;
@@ -213,5 +213,41 @@
 
   &:hover {
     background: #6941c6;
+  }
+}
+
+@media screen and (width >= 48rem) {
+  .header > button {
+    display: none;
+  }
+
+  .navLinks {
+    position: relative;
+    bottom: 0;
+    border-radius: 0;
+
+    ul {
+      flex-direction: row;
+      border: none;
+      text-align: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    ul li {
+      padding: 0;
+    }
+
+    ul li:not(:last-of-type) {
+      border-bottom: none;
+    }
+
+    ul li:last-of-type {
+      display: none;
+    }
+  }
+
+  .dashboardLink {
+    display: block;
   }
 }
