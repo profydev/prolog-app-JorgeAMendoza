@@ -1,14 +1,33 @@
 import Link from "next/link";
 import { Button, ButtonColor } from "../button";
 import style from "./contact-modal.module.scss";
+import { useEffect } from "react";
 
 interface ContactModalProps {
   closeModal: () => void;
 }
 
 export const ContactModal = ({ closeModal }: ContactModalProps) => {
+  useEffect(() => {
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [closeModal]);
+
   return (
-    <section className={style.contactModal} data-testid="supportModal">
+    <section
+      className={style.contactModal}
+      data-testid="supportModal"
+      onKeyDown={(e) => console.log(e)}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/icons/mail.svg" alt="" className={style.icon} />
 
