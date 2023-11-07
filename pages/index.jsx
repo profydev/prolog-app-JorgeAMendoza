@@ -63,6 +63,11 @@ const IssuesPage = () => {
     }
   }, [isMobile]);
 
+  useEffect(() => {
+    if (showModal) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [showModal]);
+
   return (
     <div className={styles.index} data-cover={showModal}>
       <header className={styles.header}>
