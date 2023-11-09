@@ -1,9 +1,10 @@
 @use "@styles/font";
 @use "@styles/color";
 @use "@styles/space";
+@use "@styles/breakpoint";
 
 .contactModal {
-  min-width: 343px;
+  width: 21.438rem;
   min-height: 18rem;
   background-color: #fff;
   border-radius: 12px;
@@ -51,4 +52,10 @@
   justify-content: center;
   text-decoration: none;
   flex: 1;
+}
+
+@media screen and (min-width: breakpoint.$desktop) {
+  .contactModal {
+    width: 25rem;
+  }
 }
