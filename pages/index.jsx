@@ -1,7 +1,8 @@
 import { Routes } from "@config/routes";
 import styles from "./index.module.scss";
+import { useState, useEffect } from "react";
+import { ContactModal } from "@features/ui";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import useIsMobile from "../hooks/useIsMobile";
 import { Testimonials } from "@features/ui";
 
@@ -50,6 +51,7 @@ const customerList = [
 ];
 
 const IssuesPage = () => {
+  const [showModal, setShowModal] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const isMobile = useIsMobile();
 
@@ -61,8 +63,13 @@ const IssuesPage = () => {
     }
   }, [isMobile]);
 
+  useEffect(() => {
+    if (showModal) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [showModal]);
+
   return (
-    <div>
+    <div className={styles.index} data-cover={showModal}>
       <header className={styles.header}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/logo-large.svg" alt="Prolog logo" />
@@ -168,15 +175,20 @@ const IssuesPage = () => {
       </main>
       <button
         className={styles.contactButton}
-        onClick={() =>
-          alert(
-            "Implement this in Challenge 2 - Modal:\n\nhttps://profy.dev/rjs-challenge-modal",
-          )
-        }
+        onClick={() => setShowModal(true)}
+        data-testid="supportButton"
+        aria-label="click to open the contact modal"
+        aria-controls="support-modal"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/message.svg" alt="Contact" />
       </button>
+
+      {showModal ? (
+        <div className={styles.modalContainter}>
+          <ContactModal closeModal={() => setShowModal(false)} />
+        </div>
+      ) : null}
     </div>
   );
 };
