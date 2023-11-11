@@ -5,16 +5,18 @@ import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
 import styles from "./issue-list.module.scss";
 import { useState } from "react";
-import type { Status, Query } from "@api/issues.types";
+import type { Status, Query, Level } from "@api/issues.types";
 
 export function IssueList() {
-  const [status] = useState<Status>("open");
+  const [status] = useState<Status>("");
+  const [level] = useState<Level>("info");
 
   const router = useRouter();
   const page = Number(router.query.page || 1);
   const navigateToPage = (newPage: number) => {
     const query: Query = { page: newPage };
     if (status) query.status = status;
+    if (level) query.level = level;
 
     router.push({
       pathname: router.pathname,
@@ -22,7 +24,7 @@ export function IssueList() {
     });
   };
 
-  const issuesPage = useGetIssues(page, status);
+  const issuesPage = useGetIssues(page, status, level);
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
