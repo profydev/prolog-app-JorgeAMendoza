@@ -9,7 +9,8 @@ import type { Status, Query, Level } from "@api/issues.types";
 
 export function IssueList() {
   const [status] = useState<Status>("");
-  const [level] = useState<Level>("info");
+  const [level] = useState<Level>("");
+  const [projectName] = useState<string>("");
 
   const router = useRouter();
   const page = Number(router.query.page || 1);
@@ -17,6 +18,7 @@ export function IssueList() {
     const query: Query = { page: newPage };
     if (status) query.status = status;
     if (level) query.level = level;
+    if (projectName) query.project = projectName;
 
     router.push({
       pathname: router.pathname,
@@ -24,7 +26,7 @@ export function IssueList() {
     });
   };
 
-  const issuesPage = useGetIssues(page, status, level);
+  const issuesPage = useGetIssues(page, status, level, projectName);
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
