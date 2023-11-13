@@ -85,3 +85,5 @@ describe("Issue List", () => {
     });
   });
 });
+
+// Filtering the issue list
