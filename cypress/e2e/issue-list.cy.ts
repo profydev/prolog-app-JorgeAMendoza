@@ -101,20 +101,32 @@ describe("Issue list filter, status", () => {
     }).as("getIssuesPage2");
 
     // request mocks for open filter
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1&open=true", {
-      fixture: "status/issues-open-page-1.json",
-    }).as("getIssuesPage1Open");
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=2&open=true", {
-      fixture: "status/issues-open-page-2.json",
-    }).as("getIssuesPage2Open");
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=3&open=true", {
-      fixture: "status/issues-open-page-3.json",
-    }).as("getIssuesPage3Open");
+    cy.intercept(
+      "GET",
+      "https://prolog-api.profy.dev/issue?page=1&status=open",
+      {
+        fixture: "status/issues-open-page-1.json",
+      },
+    ).as("getIssuesPage1Open");
+    cy.intercept(
+      "GET",
+      "https://prolog-api.profy.dev/issue?page=2&status=open",
+      {
+        fixture: "status/issues-open-page-2.json",
+      },
+    ).as("getIssuesPage2Open");
+    cy.intercept(
+      "GET",
+      "https://prolog-api.profy.dev/issue?page=3&status=open",
+      {
+        fixture: "status/issues-open-page-3.json",
+      },
+    ).as("getIssuesPage3Open");
 
     // request mocks for resolved filter
     cy.intercept(
       "GET",
-      "https://prolog-api.profy.dev/issue?page=1&resolved=true",
+      "https://prolog-api.profy.dev/issue?page=1&status=resolved",
       {
         fixture: "status/issues-resolved-page-1.json",
       },
@@ -148,12 +160,14 @@ describe("Issue list filter, status", () => {
       cy.wait(["@getProjects", "@getIssuesPage1Open"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&status=open");
       cy.contains("Page 1 of 3");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 10);
       cy.get("@next-button").click();
 
       // check page 2
+      cy.url().should("include", "/issue?page=2&status=open");
       cy.wait(["@getProjects", "@getIssuesPage2Open"]);
       cy.contains("Page 2 of 3");
       cy.get("@prev-button").should("not.have.attr", "disabled");
@@ -161,6 +175,7 @@ describe("Issue list filter, status", () => {
       cy.get("@next-button").click();
 
       // check page 3
+      cy.url().should("include", "/issue?page=3&status=open");
       cy.wait(["@getProjects", "@getIssuesPage3Open"]);
       cy.contains("Page 3 of 3");
       cy.get("@next-button").should("have.attr", "disabled");
@@ -175,6 +190,7 @@ describe("Issue list filter, status", () => {
       cy.wait(["@getProjects", "@getIssuesPage1Resolved"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&status=resolved");
       cy.contains("Page 1 of 1");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("@next-button").should("not.have.attr", "disabled");
@@ -263,12 +279,14 @@ describe("Issue list filter, level", () => {
       cy.wait(["@getProjects", "@getIssuesPage1Error"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&level=error");
       cy.contains("Page 1 of 2");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 10);
       cy.get("@next-button").click();
 
       // check page 2
+      cy.url().should("include", "/issue?page=2&level=error");
       cy.wait(["@getProjects", "@getIssuesPage2Error"]);
       cy.contains("Page 2 of 2");
       cy.get("@prev-button").should("not.have.attr", "disabled");
@@ -283,12 +301,14 @@ describe("Issue list filter, level", () => {
       cy.wait(["@getProjects", "@getIssuesPage1Warning"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&level=warning");
       cy.contains("Page 1 of 2");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 10);
       cy.get("@next-button").click();
 
       // check page 2
+      cy.url().should("include", "/issue?page=2&level=warning");
       cy.wait(["@getProjects", "@getIssuesPage2Warning"]);
       cy.contains("Page 2 of 2");
       cy.get("@prev-button").should("not.have.attr", "disabled");
@@ -303,6 +323,7 @@ describe("Issue list filter, level", () => {
       cy.wait(["@getProjects", "@getIssuesPage1Info"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&level=info");
       cy.contains("Page 1 of 1");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 4);
@@ -360,6 +381,7 @@ describe('Issue list filter, "search"', () => {
       cy.wait(["@getProjects", "@getIssuesPage1Project"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&project=backend");
       cy.contains("Page 1 of 1");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 5);
@@ -418,6 +440,7 @@ describe('Issue list filter, "level" and "status"', () => {
       cy.wait(["@getProjects", "@getIssuesPage1ErrorOpen"]);
 
       // check page 1
+      cy.url().should("include", "/issue?page=1&status=open&level=error");
       cy.contains("Page 1 of 1");
       cy.get("@prev-button").should("have.attr", "disabled");
       cy.get("tbody tr").should("have.length", 8);
@@ -479,6 +502,10 @@ describe('Issue list filter, "level", "status" and "project"', () => {
 
       // check page 1
       cy.contains("Page 1 of 1");
+      cy.url().should(
+        "include",
+        "/issue?page=1&status=open&level=error&project=backend",
+      );
       cy.get("tbody tr").should("have.length", 8);
       cy.get("@prev-button").should("have.attr");
       cy.get("@next-button").should("have.attr", "disabled");
