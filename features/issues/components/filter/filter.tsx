@@ -67,7 +67,7 @@ export function Filter({ navigateToPage }: FilterProps) {
           data-cy="issueLevelFilter"
           data-active={level !== ""}
         >
-          <option value="">Status</option>
+          <option value="">Level</option>
           <option value="error">Error</option>
           <option value="warning">Warning</option>
           <option value="info">Info</option>

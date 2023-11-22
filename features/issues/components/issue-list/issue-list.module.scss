@@ -18,6 +18,11 @@
   margin-block-end: space.$s6;
 }
 
+.issueOptions > *:last-child {
+  justify-self: flex-end;
+  margin-left: auto;
+}
+
 .table {
   width: 100%;
   border-collapse: collapse;

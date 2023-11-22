@@ -76,6 +76,10 @@
     width: fit-content;
     min-width: 200px;
   }
+
+  @media screen and (min-width: breakpoint.$desktop) {
+    width: 280px;
+  }
 }
 
 .filterInput img {
