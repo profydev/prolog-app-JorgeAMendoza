@@ -16,10 +16,11 @@ module.exports = {
         ],
       },
     ],
+    "value-no-vendor-prefix": [true, { ignoreValues: ["fit-content"] }],
     "property-no-vendor-prefix": [
       true,
       {
-        ignoreProperties: ["backdrop-filter"],
+        ignoreProperties: ["backdrop-filter", "appearance", "width"],
       },
     ],
   },
