@@ -28,6 +28,11 @@ describe("Project List", () => {
         warning: "warning",
         error: "critical",
       };
+      const projectNamesParams = [
+        "Frontend%20-%20Web%20Test",
+        "Backend",
+        "ML%20Service",
+      ];
 
       // get all project cards
       cy.get("[data-testid='project-list']")
@@ -48,7 +53,11 @@ describe("Project List", () => {
           cy.wrap($el).contains(capitalize(status));
           cy.wrap($el)
             .find("a")
-            .should("have.attr", "href", "/dashboard/issues");
+            .should(
+              "have.attr",
+              "href",
+              `/dashboard/issues?page=1&project=${projectNamesParams[index]}`,
+            );
         });
     });
   });
