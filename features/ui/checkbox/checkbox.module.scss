@@ -45,7 +45,7 @@
     border-color: color.$primary-600;
   }
 
-  &:focus input ~ span {
+  &:focus-within input ~ span {
     box-shadow: 0 0 0 3px color.$primary-100;
     border-color: color.$primary-300;
   }
@@ -97,6 +97,7 @@
     &.sm.partly span {
       background-color: color.$gray-100;
       border-color: color.$gray-200;
+      box-shadow: none;
     }
 
     &.md.check input:checked ~ span {
