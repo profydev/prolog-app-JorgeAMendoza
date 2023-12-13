@@ -11,9 +11,21 @@ export default {
   tags: ["autodocs"],
 } as Meta<typeof Checkbox>;
 
-const Template: StoryFn<typeof Checkbox> = ({ size, label, checkboxType }) => (
+const Template: StoryFn<typeof Checkbox> = ({
+  size,
+  label,
+  checkboxType,
+  disabled,
+  checked,
+}) => (
   <div style={{ padding: 50 }}>
-    <Checkbox size={size} label={label} checkboxType={checkboxType} />
+    <Checkbox
+      size={size}
+      label={label}
+      checkboxType={checkboxType}
+      disabled={disabled}
+      checked={checked}
+    />
   </div>
 );
 
@@ -31,11 +43,28 @@ Medium.args = {
   checkboxType: CheckboxType.check,
 };
 
+export const SmallChecked = Template.bind({});
+SmallChecked.args = {
+  size: CheckboxSize.sm,
+  label: "Label",
+  checkboxType: CheckboxType.check,
+  checked: true,
+};
+
+export const MediumChecked = Template.bind({});
+MediumChecked.args = {
+  size: CheckboxSize.md,
+  label: "Label",
+  checkboxType: CheckboxType.check,
+  checked: true,
+};
+
 export const SmallPartly = Template.bind({});
 SmallPartly.args = {
   size: CheckboxSize.sm,
   label: "Label",
   checkboxType: CheckboxType.partly,
+  checked: true,
 };
 
 export const MediumPartly = Template.bind({});
@@ -43,6 +72,7 @@ MediumPartly.args = {
   size: CheckboxSize.md,
   label: "Label",
   checkboxType: CheckboxType.partly,
+  checked: true,
 };
 
 export const Disabled = Template.bind({});
@@ -51,4 +81,28 @@ Disabled.args = {
   label: "Label",
   checkboxType: CheckboxType.check,
   disabled: true,
+};
+
+export const DisabledCheck = Template.bind({});
+DisabledCheck.args = {
+  size: CheckboxSize.md,
+  label: "Label",
+  checkboxType: CheckboxType.check,
+  checked: true,
+  disabled: true,
+};
+
+export const DisabledPartly = Template.bind({});
+DisabledPartly.args = {
+  size: CheckboxSize.md,
+  label: "Label",
+  checkboxType: CheckboxType.partly,
+  checked: true,
+  disabled: true,
+};
+
+export const NoText = Template.bind({});
+NoText.args = {
+  size: CheckboxSize.md,
+  checkboxType: CheckboxType.check,
 };

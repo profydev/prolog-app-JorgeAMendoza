@@ -50,15 +50,6 @@
     border-color: color.$primary-300;
   }
 
-  &:has(input:disabled) {
-    color: color.$gray-300;
-
-    span {
-      background-color: color.$gray-100;
-      border-color: color.$gray-200;
-    }
-  }
-
   input {
     position: absolute;
     opacity: 0;
@@ -94,5 +85,46 @@
     background:
       url("../../../public/icons/partly-check-md.svg") no-repeat center,
       color.$primary-50;
+  }
+
+  // input disabled
+  &:has(input:disabled) {
+    color: color.$gray-300;
+
+    &.md.check span,
+    &.sm.check span,
+    &.md.partly span,
+    &.sm.partly span {
+      background-color: color.$gray-100;
+      border-color: color.$gray-200;
+    }
+
+    &.md.check input:checked ~ span {
+      border-color: color.$gray-200;
+      background:
+        url("../../../public/icons/check-grey-md.svg") no-repeat center,
+        color.$gray-100;
+    }
+
+    &.sm.check input:checked ~ span {
+      border-color: color.$gray-200;
+      background:
+        url("../../../public/icons/check-grey-sm.svg") no-repeat center,
+        color.$gray-100;
+    }
+
+    &.md.partly input:checked ~ span {
+      border-color: color.$gray-200;
+      background:
+        url("../../../public/icons/partly-grey-md.svg") no-repeat center,
+        color.$gray-100;
+    }
+
+    &.sm.partly input:checked ~ span {
+      border-color: color.$gray-200;
+      background:
+        url("../../../public/icons/partly-grey-sm.svg") no-repeat center,
+        color.$gray-100;
+    }
   }
 }

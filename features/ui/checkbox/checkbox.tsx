@@ -20,6 +20,7 @@ interface CheckboxProps {
 
 interface CheckBoxAttributes extends HTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
+  checked?: boolean;
 }
 
 export const Checkbox = ({
@@ -28,6 +29,7 @@ export const Checkbox = ({
   checkboxType = CheckboxType.check,
   ...checkboxProps
 }: CheckBoxAttributes & CheckboxProps) => {
+  console.log(checkboxProps);
   return (
     <label
       data-disabled={checkboxProps.disabled}
