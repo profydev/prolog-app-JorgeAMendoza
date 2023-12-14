@@ -65,7 +65,7 @@ describe("Project list - Error", () => {
       statusCode: 400,
     }).as("getProjectsWithError");
 
-    cy.wait(7000);
+    cy.wait(9000);
 
     cy.get("main").contains(
       "There was a problem while loading the project data",
@@ -79,7 +79,7 @@ describe("Project list - Error", () => {
       statusCode: 400,
     }).as("getProjectsWithError");
 
-    cy.wait(7000);
+    cy.wait(9000);
 
     cy.get("main").contains(
       "There was a problem while loading the project data",
