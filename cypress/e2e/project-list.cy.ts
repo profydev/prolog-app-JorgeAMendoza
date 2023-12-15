@@ -28,6 +28,11 @@ describe("Project List", () => {
         warning: "warning",
         error: "critical",
       };
+      const projectNamesParams = [
+        "Frontend%20-%20Web%20Test",
+        "Backend",
+        "ML%20Service",
+      ];
 
       // get all project cards
       cy.get("[data-testid='project-list']")
@@ -48,7 +53,11 @@ describe("Project List", () => {
           cy.wrap($el).contains(capitalize(status));
           cy.wrap($el)
             .find("a")
-            .should("have.attr", "href", "/dashboard/issues");
+            .should(
+              "have.attr",
+              "href",
+              `/dashboard/issues?page=1&project=${projectNamesParams[index]}`,
+            );
         });
     });
   });
@@ -56,16 +65,20 @@ describe("Project List", () => {
 
 describe("Project list - Error", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/dashboard");
-  });
-  it("error message displayed on failed request", () => {
-    // intercept request with error
     cy.intercept("GET", "https://prolog-api.profy.dev/project", {
       body: {},
       statusCode: 400,
     }).as("getProjectsWithError");
 
-    cy.wait(7000);
+    cy.visit("http://localhost:3000/dashboard");
+  });
+  it("error message displayed on failed request", () => {
+    // intercept request with error
+
+    cy.wait("@getProjectsWithError")
+      .wait("@getProjectsWithError")
+      .wait("@getProjectsWithError")
+      .wait("@getProjectsWithError");
 
     cy.get("main").contains(
       "There was a problem while loading the project data",
@@ -74,12 +87,11 @@ describe("Project list - Error", () => {
 
   it("data is successfully retrieved after inital error, data is displayed", () => {
     // intercept request with error
-    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
-      body: {},
-      statusCode: 400,
-    }).as("getProjectsWithError");
 
-    cy.wait(7000);
+    cy.wait("@getProjectsWithError")
+      .wait("@getProjectsWithError")
+      .wait("@getProjectsWithError")
+      .wait("@getProjectsWithError");
 
     cy.get("main").contains(
       "There was a problem while loading the project data",

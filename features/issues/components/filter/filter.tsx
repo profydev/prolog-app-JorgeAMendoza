@@ -18,7 +18,7 @@ export function Filter({ navigateToPage }: FilterProps) {
   const [name, setName] = useState(projectName);
 
   useEffect(() => {
-    if (projectName === "") setName("");
+    setName(projectName);
   }, [projectName]);
   return (
     <form
