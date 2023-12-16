@@ -1,7 +1,6 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import { Button, ButtonColor, ButtonIcon, ButtonSize } from "./button";
-// import alertCircle from "../../../public/icons/alert-circle.svg";
 
 export default {
   title: "UI/Button",
