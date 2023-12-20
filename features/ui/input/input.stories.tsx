@@ -108,7 +108,16 @@ export const HintEmptyIcon = Template.bind({});
 HintEmptyIcon.args = {
   placeholder: "olivia@untitled.com",
   ariaText: "empty text input with hint and icon",
-  hint: "This is a hint to help the user",
+  hint: "This is a hint text to help user.",
+  icon: "/icons/mail-gray.svg",
+};
+
+export const HintEmptyLabelIcon = Template.bind({});
+HintEmptyLabelIcon.args = {
+  placeholder: "olivia@untitled.com",
+  ariaText: "empty text input with hint, label, and icon",
+  label: "Email",
+  hint: "This is a hint text to help user.",
   icon: "/icons/mail-gray.svg",
 };
 
