@@ -27,7 +27,7 @@ export const Input = ({
 }: InputAttributes & InputProps) => {
   return (
     <label
-      aria-label={!label ? ariaText : ""}
+      aria-label={label ? "" : ariaText}
       className={style.inputLabel}
       data-disabled={inputProps.disabled}
       data-error={error}
@@ -50,7 +50,7 @@ export const Input = ({
       </span>
 
       {hint && <span className={style.hintText}>{hint}</span>}
-      {error && <span className={style.errorText}>{errorText}</span>}
+      {errorText && <span className={style.errorText}>{errorText}</span>}
     </label>
   );
 };

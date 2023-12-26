@@ -121,15 +121,15 @@ HintEmptyLabelIcon.args = {
   icon: "/icons/mail-gray.svg",
 };
 
-export const ErrorEmptyIcon = Template.bind({});
-ErrorEmptyIcon.args = {
+export const ErrorEmpty = Template.bind({});
+ErrorEmpty.args = {
   placeholder: "olivia@untitledui.com",
   ariaText: "empty text input with error and icon",
   error: true,
 };
 
-export const ErrorFilledIcon = Template.bind({});
-ErrorFilledIcon.args = {
+export const ErrorFilled = Template.bind({});
+ErrorFilled.args = {
   placeholder: "olivia@untitledui.com",
   ariaText: "filled text input with error and icon",
   error: true,
