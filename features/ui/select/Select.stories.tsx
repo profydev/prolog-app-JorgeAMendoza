@@ -20,6 +20,7 @@ const Template: StoryFn<typeof Select> = ({
   icon,
   disabled,
   label,
+  hintText,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
@@ -32,6 +33,7 @@ const Template: StoryFn<typeof Select> = ({
       icon={icon}
       disabled={disabled}
       label={label}
+      hintText={hintText}
     />
   </div>
 );
@@ -123,4 +125,33 @@ WithLabelSelected.args = {
   placeholder: "Select a team member",
   label: "Team Member",
   icon: "/icons/user.svg",
+};
+
+export const WithLabelDisabled = Template.bind({});
+WithLabelDisabled.args = {
+  options,
+  groupName: "disabled",
+  ariaText: "Disabled",
+  placeholder: "Select a team member",
+  disabled: true,
+  label: "Team Member",
+};
+
+export const WithHintText = Template.bind({});
+WithHintText.args = {
+  options,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  hintText: "Hint Text",
+};
+
+export const WithHintTextSelected = Template.bind({});
+WithHintTextSelected.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  hintText: "Hint Text",
 };

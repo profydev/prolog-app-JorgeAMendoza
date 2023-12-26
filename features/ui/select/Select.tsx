@@ -18,6 +18,7 @@ interface SelectProps {
   placeholder?: string;
   disabled?: boolean;
   icon?: string;
+  hintText?: string;
 }
 
 export const Select = ({
@@ -31,6 +32,7 @@ export const Select = ({
   label,
   icon,
   disabled,
+  hintText,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -55,6 +57,7 @@ export const Select = ({
         {icon ? <img src={icon} alt="" /> : null}
         {value === "" ? placeholder : value}
       </button>
+      {hintText ? <p className={style.hintText}>{hintText}</p> : null}
       <ul id={`${groupName}Id`}>
         {hasEmpty ? (
           <>
