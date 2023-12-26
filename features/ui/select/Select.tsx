@@ -15,6 +15,7 @@ interface SelectProps {
   label?: string;
   placeholder?: string;
   disabled?: boolean;
+  icon?: string;
 }
 
 export const Select = ({
@@ -25,11 +26,14 @@ export const Select = ({
   ariaText,
   placeholder = "Select",
   hasEmpty = false,
+  label,
+  icon,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div>
+      {label ? <p>{label}</p> : null}
       <button
         onClick={() => setIsOpen(!isOpen)}
         type="button"
@@ -39,6 +43,8 @@ export const Select = ({
         aria-haspopup="listbox"
         aria-label={ariaText}
       >
+        {/* eslint-disable-next-line */}
+        {icon ? <img src={icon} alt="" /> : null}
         {value === "" ? placeholder : value}
       </button>
       <ul id={`${groupName}Id`}>

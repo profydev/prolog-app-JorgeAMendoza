@@ -17,6 +17,7 @@ const Template: StoryFn<typeof Select> = ({
   groupName,
   ariaText,
   placeholder,
+  icon,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
@@ -26,6 +27,7 @@ const Template: StoryFn<typeof Select> = ({
       ariaText={ariaText}
       action={() => {}}
       placeholder={placeholder}
+      icon={icon}
     />
   </div>
 );
@@ -67,4 +69,13 @@ Disabled.args = {
   ariaText: "Disabled",
   placeholder: "Select a team member",
   disabled: true,
+};
+
+export const EmptyWithIcon = Template.bind({});
+EmptyWithIcon.args = {
+  options,
+  groupName: "empty",
+  ariaText: "Empty",
+  placeholder: "Select a team member",
+  icon: "/icons/user.svg",
 };
