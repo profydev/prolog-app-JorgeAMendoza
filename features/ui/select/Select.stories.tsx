@@ -18,6 +18,7 @@ const Template: StoryFn<typeof Select> = ({
   ariaText,
   placeholder,
   icon,
+  disabled,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
@@ -28,6 +29,7 @@ const Template: StoryFn<typeof Select> = ({
       action={() => {}}
       placeholder={placeholder}
       icon={icon}
+      disabled={disabled}
     />
   </div>
 );

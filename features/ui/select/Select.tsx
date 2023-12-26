@@ -1,4 +1,6 @@
 import { useState } from "react";
+import style from "./select.module.scss";
+import { useClickOutside } from "@features/hooks";
 
 interface option {
   name: string;
@@ -28,11 +30,16 @@ export const Select = ({
   hasEmpty = false,
   label,
   icon,
+  disabled,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    if (isOpen === false) return;
+    setIsOpen(false);
+  });
   return (
-    <div>
+    <div className={style.select} ref={ref}>
       {label ? <p>{label}</p> : null}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -42,6 +49,7 @@ export const Select = ({
         aria-expanded={isOpen ? "true" : "false"}
         aria-haspopup="listbox"
         aria-label={ariaText}
+        disabled={disabled}
       >
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
@@ -60,7 +68,7 @@ export const Select = ({
                       type="radio"
                       name={groupName}
                       value={option.value}
-                      onClick={() => {
+                      onChange={() => {
                         setValue(option.value);
                         action(option.value);
                       }}
@@ -79,7 +87,7 @@ export const Select = ({
                     type="radio"
                     name={groupName}
                     value={option.value}
-                    onClick={() => {
+                    onChange={() => {
                       setValue(option.value);
                       action(option.value);
                     }}

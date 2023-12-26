@@ -1,0 +1,17 @@
+.select {
+  position: relative;
+
+  button {
+    background-color: #fff;
+  }
+
+  ul {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+  }
+
+  button[aria-expanded="false"] ~ ul {
+    visibility: hidden;
+  }
+}
