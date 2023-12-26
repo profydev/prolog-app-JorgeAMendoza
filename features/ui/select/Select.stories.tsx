@@ -19,6 +19,7 @@ const Template: StoryFn<typeof Select> = ({
   placeholder,
   icon,
   disabled,
+  label,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
@@ -30,6 +31,7 @@ const Template: StoryFn<typeof Select> = ({
       placeholder={placeholder}
       icon={icon}
       disabled={disabled}
+      label={label}
     />
   </div>
 );
@@ -79,5 +81,46 @@ EmptyWithIcon.args = {
   groupName: "empty",
   ariaText: "Empty",
   placeholder: "Select a team member",
+  icon: "/icons/user.svg",
+};
+
+export const WithDefaultIcon = Template.bind({});
+WithDefaultIcon.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  icon: "/icons/user.svg",
+};
+
+export const WithIconDisabled = Template.bind({});
+WithIconDisabled.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "disabled",
+  ariaText: "Disabled",
+  placeholder: "Select a team member",
+  disabled: true,
+  icon: "/icons/user.svg",
+};
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {
+  options,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  label: "Team Member",
+};
+
+export const WithLabelSelected = Template.bind({});
+WithLabelSelected.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  label: "Team Member",
   icon: "/icons/user.svg",
 };
