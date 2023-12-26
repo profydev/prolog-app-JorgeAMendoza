@@ -19,6 +19,8 @@ interface SelectProps {
   disabled?: boolean;
   icon?: string;
   hintText?: string;
+  error?: boolean;
+  errorText?: string;
 }
 
 export const Select = ({
@@ -33,6 +35,8 @@ export const Select = ({
   icon,
   disabled,
   hintText,
+  error,
+  errorText,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -56,8 +60,11 @@ export const Select = ({
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
         {value === "" ? placeholder : value}
+        {/* eslint-disable-next-line */}
+        {error ? <img src="/icons/alert-circle.svg" alt="" /> : null}
       </button>
       {hintText ? <p className={style.hintText}>{hintText}</p> : null}
+      {error && errorText ? <p>{errorText}</p> : null}
       <ul id={`${groupName}Id`}>
         {hasEmpty ? (
           <>

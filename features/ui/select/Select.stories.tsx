@@ -21,6 +21,8 @@ const Template: StoryFn<typeof Select> = ({
   disabled,
   label,
   hintText,
+  error,
+  errorText,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
@@ -34,6 +36,8 @@ const Template: StoryFn<typeof Select> = ({
       disabled={disabled}
       label={label}
       hintText={hintText}
+      error={error}
+      errorText={errorText}
     />
   </div>
 );
@@ -154,4 +158,100 @@ WithHintTextSelected.args = {
   ariaText: "Default",
   placeholder: "Select a team member",
   hintText: "Hint Text",
+};
+
+export const WithErrorEmpty = Template.bind({});
+WithErrorEmpty.args = {
+  options,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+};
+
+export const WithErrorSelected = Template.bind({});
+WithErrorSelected.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+};
+
+export const WithErrorDisabled = Template.bind({});
+WithErrorDisabled.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "disabled",
+  ariaText: "Disabled",
+  placeholder: "Select a team member",
+  disabled: true,
+  error: true,
+};
+
+export const WithErrorEmptyIcon = Template.bind({});
+WithErrorEmptyIcon.args = {
+  options,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+  icon: "/icons/user.svg",
+};
+
+export const WithErrorSelectedIcon = Template.bind({});
+WithErrorSelectedIcon.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+  icon: "/icons/user.svg",
+};
+
+export const WithErrorDisabledIcon = Template.bind({});
+WithErrorDisabledIcon.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "disabled",
+  ariaText: "Disabled",
+  placeholder: "Select a team member",
+  disabled: true,
+  error: true,
+  icon: "/icons/user.svg",
+};
+
+export const WithErrorEmptyMessage = Template.bind({});
+WithErrorEmptyMessage.args = {
+  options,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+  errorText: "This is a error message.",
+};
+
+export const WithErrorSelectedMessage = Template.bind({});
+WithErrorSelectedMessage.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "default",
+  ariaText: "Default",
+  placeholder: "Select a team member",
+  error: true,
+  errorText: "This is a error message.",
+};
+
+export const WithErrorDisabledMessage = Template.bind({});
+WithErrorDisabledMessage.args = {
+  options,
+  defaultSelected: defaultValue,
+  groupName: "disabled",
+  ariaText: "Disabled",
+  placeholder: "Select a team member",
+  disabled: true,
+  error: true,
+  errorText: "This is a error message.",
 };
