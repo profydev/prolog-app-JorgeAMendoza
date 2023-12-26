@@ -2,6 +2,7 @@ import { Level, Status } from "@api/issues.types";
 import { useFilter } from "../context/filter-context";
 import { useEffect, useState } from "react";
 import styles from "./filter.module.scss";
+import { Input } from "@features/ui";
 
 interface FilterProps {
   navigateToPage: (
@@ -73,18 +74,14 @@ export function Filter({ navigateToPage }: FilterProps) {
           <option value="info">Info</option>
         </select>
       </label>
-      <label aria-label="Filter by project name" className={styles.filterInput}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/search.svg" alt="" />
-        <input
-          type="text"
-          maxLength={25}
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          data-cy="issueProjectNameFilter"
-          placeholder="Project Name"
-        />
-      </label>
+      <Input
+        maxLength={25}
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        data-cy="issueProjectNameFilter"
+        placeholder="Project Name"
+        ariaText="Filter by project name"
+      />
     </form>
   );
 }
