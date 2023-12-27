@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import style from "./select.module.scss";
 import { useClickOutside } from "@features/hooks";
+import { List } from "./components/List";
 
-interface option {
+export interface option {
   name: string;
   value: string;
 }
@@ -40,30 +41,10 @@ export const Select = ({
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const list = useRef<HTMLUListElement>(null);
   const ref = useClickOutside<HTMLDivElement>(() => {
     if (isOpen === false) return;
     setIsOpen(false);
   });
-
-  useEffect(() => {
-    const selectList = list.current;
-    const handleKey = (e: KeyboardEvent) => {
-      if (!isOpen) return;
-      switch (e.key) {
-        case "Escape": {
-          setIsOpen(false);
-          break;
-        }
-      }
-    };
-
-    selectList?.addEventListener("keydown", handleKey);
-
-    return () => {
-      selectList?.removeEventListener("keydown", handleKey);
-    };
-  }, [isOpen]);
 
   return (
     <div className={style.select} ref={ref}>
@@ -86,50 +67,16 @@ export const Select = ({
       </button>
       {hintText ? <p className={style.hintText}>{hintText}</p> : null}
       {error && errorText ? <p>{errorText}</p> : null}
-      <ul id={`${groupName}Id`} ref={list}>
-        {hasEmpty ? (
-          <>
-            {[{ value: "", name: placeholder }]
-              .concat(options)
-              .map((option) => (
-                <li key={option.name} data-active={option.value === value}>
-                  <label>
-                    {option.name}
-                    <input
-                      type="radio"
-                      name={groupName}
-                      value={option.value}
-                      onChange={() => {
-                        setValue(option.value);
-                        action(option.value);
-                      }}
-                    />
-                  </label>
-                </li>
-              ))}
-          </>
-        ) : (
-          <>
-            {options.map((option) => (
-              <li key={option.name} data-active={option.value === value}>
-                <label>
-                  {option.name}
-                  <input
-                    type="radio"
-                    name={groupName}
-                    value={option.value}
-                    onChange={() => {
-                      setValue(option.value);
-                      action(option.value);
-                    }}
-                    checked={option.value === value}
-                  />
-                </label>
-              </li>
-            ))}
-          </>
-        )}
-      </ul>
+      <List
+        groupName={groupName}
+        hasEmpty={hasEmpty}
+        options={options}
+        value={value}
+        setValue={setValue}
+        action={action}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
     </div>
   );
 };
