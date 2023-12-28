@@ -27,7 +27,6 @@ interface SelectProps {
 export const Select = ({
   options,
   defaultSelected,
-  action,
   groupName,
   ariaText,
   placeholder = "Select",
@@ -73,7 +72,6 @@ export const Select = ({
         options={options}
         value={value}
         setValue={setValue}
-        action={action}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />

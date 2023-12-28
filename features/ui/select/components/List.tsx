@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { option } from "../Select";
+import style from "./List.module.scss";
 
 interface ListProps {
   groupName: string;
@@ -7,7 +8,6 @@ interface ListProps {
   options: option[];
   value: string;
   setValue: (value: string) => void;
-  action: (value: string) => void;
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
@@ -18,7 +18,6 @@ export const List = ({
   options,
   value,
   setValue,
-  action,
   isOpen,
   setIsOpen,
 }: ListProps) => {
@@ -42,8 +41,14 @@ export const List = ({
     const handleKey = (e: KeyboardEvent) => {
       if (!isOpen) return;
       switch (e.key) {
+        case "Tab":
+        case "Enter":
         case "Escape": {
+          const selectedValue =
+            selectList?.querySelector<HTMLInputElement>("input:focus")?.value;
+          setValue(selectedValue || "");
           setIsOpen(false);
+
           break;
         }
       }
@@ -54,14 +59,22 @@ export const List = ({
     return () => {
       selectList?.removeEventListener("keydown", handleKey);
     };
-  }, [isOpen, setIsOpen, value]);
+  }, [isOpen, setIsOpen, value, setValue]);
 
   return (
     <ul id={`${groupName}Id`} ref={list}>
       {hasEmpty ? (
         <>
           {[{ value: "", name: "---" }].concat(options).map((option) => (
-            <li key={option.name} data-active={option.value === value}>
+            <li
+              className={style.selectOption}
+              key={option.name}
+              data-active={option.value === value}
+              onMouseDown={() => {
+                setValue(option.value);
+                setIsOpen(false);
+              }}
+            >
               <label>
                 {option.name}
                 <input
@@ -70,8 +83,8 @@ export const List = ({
                   value={option.value}
                   onChange={() => {
                     setValue(option.value);
-                    action(option.value);
                   }}
+                  checked={option.value === value}
                 />
               </label>
             </li>
@@ -80,8 +93,17 @@ export const List = ({
       ) : (
         <>
           {options.map((option) => (
-            <li key={option.name} data-active={option.value === value}>
-              <label>
+            <li
+              className={style.selectOption}
+              key={option.name}
+              data-active={option.value === value}
+            >
+              <label
+                onMouseDown={() => {
+                  setValue(option.value);
+                  setIsOpen(false);
+                }}
+              >
                 {option.name}
                 <input
                   type="radio"
@@ -89,7 +111,6 @@ export const List = ({
                   value={option.value}
                   onChange={() => {
                     setValue(option.value);
-                    action(option.value);
                   }}
                   checked={option.value === value}
                 />
