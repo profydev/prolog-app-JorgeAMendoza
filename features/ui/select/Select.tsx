@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./select.module.scss";
 import { useClickOutside } from "@features/hooks";
 import { List } from "./components/List";
@@ -25,6 +25,7 @@ interface SelectProps {
 }
 
 export const Select = ({
+  action,
   options,
   defaultSelected,
   groupName,
@@ -39,11 +40,21 @@ export const Select = ({
   errorText,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
+  const [selected, setSelected] = useState(defaultSelected?.name || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
     if (isOpen === false) return;
     setIsOpen(false);
   });
+
+  useEffect(() => {
+    if (isOpen || value === selected) {
+      return;
+    }
+
+    setValue(selected);
+    action(selected);
+  }, [isOpen, selected, value, action]);
 
   return (
     <div className={style.select} ref={ref}>
@@ -60,7 +71,7 @@ export const Select = ({
       >
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
-        {value === "" ? placeholder : value}
+        {selected === "" ? placeholder : selected}
         {/* eslint-disable-next-line */}
         {error ? <img src="/icons/alert-circle.svg" alt="" /> : null}
       </button>
@@ -70,8 +81,8 @@ export const Select = ({
         groupName={groupName}
         hasEmpty={hasEmpty}
         options={options}
-        value={value}
-        setValue={setValue}
+        selected={selected}
+        setSelected={setSelected}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
       />

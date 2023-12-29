@@ -6,18 +6,18 @@ interface ListProps {
   groupName: string;
   hasEmpty: boolean;
   options: option[];
-  value: string;
-  setValue: (value: string) => void;
+  selected: string;
+  setSelected: React.Dispatch<string>;
   isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
+  setIsOpen: React.Dispatch<boolean>;
 }
 
 export const List = ({
   groupName,
   hasEmpty,
   options,
-  value,
-  setValue,
+  selected,
+  setSelected,
   isOpen,
   setIsOpen,
 }: ListProps) => {
@@ -26,7 +26,7 @@ export const List = ({
     const selectList = list.current;
     if (isOpen) {
       const selectedInput = selectList?.querySelector<HTMLInputElement>(
-        `input[value="${value}"]`,
+        `input[value="${selected}"]`,
       );
       const firstInput = selectList?.querySelector<HTMLInputElement>(
         "input:first-of-type",
@@ -46,9 +46,8 @@ export const List = ({
         case "Escape": {
           const selectedValue =
             selectList?.querySelector<HTMLInputElement>("input:focus")?.value;
-          setValue(selectedValue || "");
+          setSelected(selectedValue || "");
           setIsOpen(false);
-
           break;
         }
       }
@@ -59,7 +58,7 @@ export const List = ({
     return () => {
       selectList?.removeEventListener("keydown", handleKey);
     };
-  }, [isOpen, setIsOpen, value, setValue]);
+  }, [isOpen, setIsOpen, setSelected, selected]);
 
   return (
     <ul id={`${groupName}Id`} ref={list}>
@@ -69,9 +68,9 @@ export const List = ({
             <li
               className={style.selectOption}
               key={option.name}
-              data-active={option.value === value}
+              data-active={option.value === selected}
               onMouseDown={() => {
-                setValue(option.value);
+                setSelected(option.value);
                 setIsOpen(false);
               }}
             >
@@ -82,9 +81,9 @@ export const List = ({
                   name={groupName}
                   value={option.value}
                   onChange={() => {
-                    setValue(option.value);
+                    setSelected(option.value);
                   }}
-                  checked={option.value === value}
+                  checked={option.value === selected}
                 />
               </label>
             </li>
@@ -96,11 +95,11 @@ export const List = ({
             <li
               className={style.selectOption}
               key={option.name}
-              data-active={option.value === value}
+              data-active={option.value === selected}
             >
               <label
                 onMouseDown={() => {
-                  setValue(option.value);
+                  setSelected(option.value);
                   setIsOpen(false);
                 }}
               >
@@ -110,9 +109,9 @@ export const List = ({
                   name={groupName}
                   value={option.value}
                   onChange={() => {
-                    setValue(option.value);
+                    setSelected(option.value);
                   }}
-                  checked={option.value === value}
+                  checked={option.value === selected}
                 />
               </label>
             </li>

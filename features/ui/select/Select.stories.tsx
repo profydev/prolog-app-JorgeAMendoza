@@ -30,7 +30,9 @@ const Template: StoryFn<typeof Select> = ({
       defaultSelected={defaultSelected}
       groupName={groupName}
       ariaText={ariaText}
-      action={() => {}}
+      action={() => {
+        console.log("Action function called");
+      }}
       placeholder={placeholder}
       icon={icon}
       disabled={disabled}
