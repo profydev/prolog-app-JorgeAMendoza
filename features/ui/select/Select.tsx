@@ -40,7 +40,7 @@ export const Select = ({
   errorText,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
-  const [selected, setSelected] = useState(defaultSelected?.name || "");
+  const [selected, setSelected] = useState(defaultSelected?.value || "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
     if (isOpen === false) return;
