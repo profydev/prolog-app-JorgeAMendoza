@@ -3,17 +3,17 @@ import style from "./select.module.scss";
 import { useClickOutside } from "@features/hooks";
 import { List } from "./components/List";
 
-export interface option {
+export interface Option {
   name: string;
   value: string;
 }
 
 interface SelectProps {
-  options: option[];
+  options: Option[];
   action: (value: string) => void;
   ariaText: string;
   groupName: string;
-  defaultSelected?: option;
+  defaultSelected?: Option;
   hasEmpty?: boolean;
   label?: string;
   placeholder?: string;
@@ -40,7 +40,9 @@ export const Select = ({
   errorText,
 }: SelectProps) => {
   const [value, setValue] = useState<string>(defaultSelected?.value || "");
-  const [selected, setSelected] = useState(defaultSelected?.value || "");
+  const [selected, setSelected] = useState<Option>(
+    defaultSelected || ({} as Option),
+  );
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
     if (isOpen === false) return;
@@ -48,12 +50,12 @@ export const Select = ({
   });
 
   useEffect(() => {
-    if (isOpen || value === selected) {
+    if (isOpen || value === selected.value) {
       return;
     }
 
-    setValue(selected);
-    action(selected);
+    setValue(selected.value);
+    action(selected.value);
   }, [isOpen, selected, value, action]);
 
   return (
@@ -71,7 +73,7 @@ export const Select = ({
       >
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
-        {selected === "" ? placeholder : selected}
+        {!selected.name || selected.value === "" ? placeholder : selected.name}
         {/* eslint-disable-next-line */}
         {error ? <img src="/icons/alert-circle.svg" alt="" /> : null}
       </button>
@@ -79,8 +81,7 @@ export const Select = ({
       {error && errorText ? <p>{errorText}</p> : null}
       <List
         groupName={groupName}
-        hasEmpty={hasEmpty}
-        options={options}
+        options={hasEmpty ? [{ name: "---", value: "" }, ...options] : options}
         selected={selected}
         setSelected={setSelected}
         isOpen={isOpen}

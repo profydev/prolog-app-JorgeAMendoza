@@ -1,20 +1,18 @@
 import { useEffect, useRef } from "react";
-import type { option } from "../Select";
+import type { Option } from "../Select";
 import style from "./List.module.scss";
 
 interface ListProps {
   groupName: string;
-  hasEmpty: boolean;
-  options: option[];
-  selected: string;
-  setSelected: React.Dispatch<string>;
+  options: Option[];
+  selected: Option;
+  setSelected: React.Dispatch<Option>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
 }
 
 export const List = ({
   groupName,
-  hasEmpty,
   options,
   selected,
   setSelected,
@@ -26,7 +24,7 @@ export const List = ({
     const selectList = list.current;
     if (isOpen) {
       const selectedInput = selectList?.querySelector<HTMLInputElement>(
-        `input[value="${selected}"]`,
+        `input[value="${selected.value}"]`,
       );
       const firstInput = selectList?.querySelector<HTMLInputElement>(
         "input:first-of-type",
@@ -46,7 +44,11 @@ export const List = ({
         case "Escape": {
           const selectedValue =
             selectList?.querySelector<HTMLInputElement>("input:focus")?.value;
-          setSelected(selectedValue || "");
+          const targetOption = options.find(
+            (option) => option.value === selectedValue,
+          );
+
+          setSelected(targetOption || ({} as Option));
           setIsOpen(false);
           break;
         }
@@ -58,66 +60,37 @@ export const List = ({
     return () => {
       selectList?.removeEventListener("keydown", handleKey);
     };
-  }, [isOpen, setIsOpen, setSelected, selected]);
+  }, [isOpen, setIsOpen, setSelected, selected, options]);
 
   return (
     <ul id={`${groupName}Id`} ref={list}>
-      {hasEmpty ? (
-        <>
-          {[{ value: "", name: "---" }].concat(options).map((option) => (
-            <li
-              className={style.selectOption}
-              key={option.name}
-              data-active={option.value === selected}
+      <>
+        {options.map((option) => (
+          <li
+            className={style.selectOption}
+            key={option.name}
+            data-active={option.value === selected.value}
+          >
+            <label
               onMouseDown={() => {
-                setSelected(option.value);
+                setSelected(option);
                 setIsOpen(false);
               }}
             >
-              <label>
-                {option.name}
-                <input
-                  type="radio"
-                  name={groupName}
-                  value={option.value}
-                  onChange={() => {
-                    setSelected(option.value);
-                  }}
-                  checked={option.value === selected}
-                />
-              </label>
-            </li>
-          ))}
-        </>
-      ) : (
-        <>
-          {options.map((option) => (
-            <li
-              className={style.selectOption}
-              key={option.name}
-              data-active={option.value === selected}
-            >
-              <label
-                onMouseDown={() => {
-                  setSelected(option.value);
-                  setIsOpen(false);
+              {option.name}
+              <input
+                type="radio"
+                name={groupName}
+                value={option.value}
+                onChange={() => {
+                  setSelected(option);
                 }}
-              >
-                {option.name}
-                <input
-                  type="radio"
-                  name={groupName}
-                  value={option.value}
-                  onChange={() => {
-                    setSelected(option.value);
-                  }}
-                  checked={option.value === selected}
-                />
-              </label>
-            </li>
-          ))}
-        </>
-      )}
+                checked={option.value === selected.value}
+              />
+            </label>
+          </li>
+        ))}
+      </>
     </ul>
   );
 };
