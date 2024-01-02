@@ -61,7 +61,7 @@ Empty.args = {
   options,
   groupName: "empty",
   ariaText: "Empty",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
 };
 
 export const WithDefault = Template.bind({});
@@ -70,7 +70,7 @@ WithDefault.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
 };
 
 export const Disabled = Template.bind({});
@@ -79,7 +79,7 @@ Disabled.args = {
   defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
 };
 
@@ -88,7 +88,7 @@ EmptyWithIcon.args = {
   options,
   groupName: "empty",
   ariaText: "Empty",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   icon: "/icons/user.svg",
 };
 
@@ -98,7 +98,7 @@ WithDefaultIcon.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   icon: "/icons/user.svg",
 };
 
@@ -108,7 +108,7 @@ WithIconDisabled.args = {
   defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
   icon: "/icons/user.svg",
 };
@@ -118,7 +118,7 @@ WithLabel.args = {
   options,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   label: "Team Member",
 };
 
@@ -128,7 +128,7 @@ WithLabelSelected.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   label: "Team Member",
   icon: "/icons/user.svg",
 };
@@ -138,7 +138,7 @@ WithLabelDisabled.args = {
   options,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
   label: "Team Member",
 };
@@ -148,7 +148,7 @@ WithHintText.args = {
   options,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   hintText: "Hint Text",
 };
 
@@ -158,7 +158,7 @@ WithHintTextSelected.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   hintText: "Hint Text",
 };
 
@@ -167,7 +167,7 @@ WithErrorEmpty.args = {
   options,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
 };
 
@@ -177,7 +177,7 @@ WithErrorSelected.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
 };
 
@@ -187,7 +187,7 @@ WithErrorDisabled.args = {
   defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
   error: true,
 };
@@ -197,7 +197,7 @@ WithErrorEmptyIcon.args = {
   options,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
   icon: "/icons/user.svg",
 };
@@ -208,7 +208,7 @@ WithErrorSelectedIcon.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
   icon: "/icons/user.svg",
 };
@@ -219,7 +219,7 @@ WithErrorDisabledIcon.args = {
   defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
   error: true,
   icon: "/icons/user.svg",
@@ -230,7 +230,7 @@ WithErrorEmptyMessage.args = {
   options,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
   errorText: "This is a error message.",
 };
@@ -241,7 +241,7 @@ WithErrorSelectedMessage.args = {
   defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   error: true,
   errorText: "This is a error message.",
 };
@@ -252,7 +252,7 @@ WithErrorDisabledMessage.args = {
   defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
-  placeholder: "Select a team member",
+  placeholder: "Select team member",
   disabled: true,
   error: true,
   errorText: "This is a error message.",

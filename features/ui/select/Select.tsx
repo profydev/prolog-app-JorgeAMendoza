@@ -70,12 +70,13 @@ export const Select = ({
         aria-haspopup="listbox"
         aria-label={ariaText}
         disabled={disabled}
+        data-empty={!selected.value}
       >
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
         {!selected.name || selected.value === "" ? placeholder : selected.name}
         {/* eslint-disable-next-line */}
-        {error ? <img src="/icons/alert-circle.svg" alt="" /> : null}
+        <img src="/icons/chevron.svg" alt="" data-open={isOpen} />
       </button>
       {hintText ? <p className={style.hintText}>{hintText}</p> : null}
       {error && errorText ? <p>{errorText}</p> : null}
