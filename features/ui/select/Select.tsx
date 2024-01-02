@@ -60,7 +60,7 @@ export const Select = ({
 
   return (
     <div className={style.select} ref={ref}>
-      {label ? <p>{label}</p> : null}
+      {label ? <p className={style.labelText}>{label}</p> : null}
       <button
         onClick={() => setIsOpen(!isOpen)}
         type="button"
@@ -71,6 +71,7 @@ export const Select = ({
         aria-label={ariaText}
         disabled={disabled}
         data-empty={!selected.value}
+        data-error={error}
       >
         {/* eslint-disable-next-line */}
         {icon ? <img src={icon} alt="" /> : null}
@@ -79,7 +80,9 @@ export const Select = ({
         <img src="/icons/chevron.svg" alt="" data-open={isOpen} />
       </button>
       {hintText ? <p className={style.hintText}>{hintText}</p> : null}
-      {error && errorText ? <p>{errorText}</p> : null}
+      {error && errorText && !disabled ? (
+        <p className={style.errorText}>{errorText}</p>
+      ) : null}
       <List
         groupName={groupName}
         options={hasEmpty ? [{ name: "---", value: "" }, ...options] : options}

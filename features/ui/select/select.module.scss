@@ -7,10 +7,38 @@
   box-sizing: border-box;
   width: 100%;
 
+  .labelText {
+    font: font.$text-sm-medium;
+    color: color.$gray-700;
+    margin: 0;
+    margin-block-end: space.$s2;
+  }
+
+  .hintText {
+    font: font.$text-sm-regular;
+    color: color.$gray-500;
+    margin: 0;
+    margin-block-start: space.$s1;
+  }
+
+  .errorText {
+    font: font.$text-sm-regular;
+    color: color.$error-500;
+    margin: 0;
+    margin-block-start: space.$s1;
+  }
+
+  ul {
+    position: absolute;
+    top: 1.5rem;
+    left: 0;
+  }
+
   button {
     background-color: #fff;
     display: flex;
     align-items: center;
+    gap: space.$s2;
     width: 100%;
     border: 1px solid color.$gray-300;
     border-radius: 8px;
@@ -19,12 +47,8 @@
     padding: 0 space.$s3;
     color: color.$gray-900;
     outline: transparent;
-
-    ul {
-      position: absolute;
-      top: 2rem;
-      left: 0;
-    }
+    box-sizing: border-box;
+    font: font.$text-md-regular;
 
     &[aria-expanded="false"] ~ ul {
       visibility: hidden;
@@ -32,6 +56,10 @@
 
     &[data-empty="true"] {
       color: color.$gray-500;
+    }
+
+    &[data-error="true"] {
+      border: 1px solid color.$error-300;
     }
 
     & img:last-of-type {
@@ -53,6 +81,11 @@
     button {
       border-color: color.$primary-300;
       box-shadow: 0 0 0 4px color.$primary-100;
+    }
+
+    button[data-error="true"] {
+      border-color: color.$error-300;
+      box-shadow: 0 0 0 4px color.$error-100;
     }
   }
 }

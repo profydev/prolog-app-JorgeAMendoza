@@ -119,7 +119,7 @@ WithLabel.args = {
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
-  label: "Team Member",
+  label: "Team member",
 };
 
 export const WithLabelSelected = Template.bind({});
@@ -129,7 +129,7 @@ WithLabelSelected.args = {
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
-  label: "Team Member",
+  label: "Team member",
   icon: "/icons/user.svg",
 };
 
@@ -140,7 +140,7 @@ WithLabelDisabled.args = {
   ariaText: "Disabled",
   placeholder: "Select team member",
   disabled: true,
-  label: "Team Member",
+  label: "Team member",
 };
 
 export const WithHintText = Template.bind({});
@@ -149,7 +149,7 @@ WithHintText.args = {
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
-  hintText: "Hint Text",
+  hintText: "This is a hint text to help user.",
 };
 
 export const WithHintTextSelected = Template.bind({});
@@ -159,7 +159,7 @@ WithHintTextSelected.args = {
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
-  hintText: "Hint Text",
+  hintText: "This is a hint text to help user.",
 };
 
 export const WithErrorEmpty = Template.bind({});
