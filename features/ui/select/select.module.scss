@@ -28,10 +28,8 @@
     margin-block-start: space.$s1;
   }
 
-  ul {
-    position: absolute;
-    top: 1.5rem;
-    left: 0;
+  .listContainer {
+    position: relative;
   }
 
   button {
@@ -49,10 +47,6 @@
     outline: transparent;
     box-sizing: border-box;
     font: font.$text-md-regular;
-
-    &[aria-expanded="false"] ~ ul {
-      visibility: hidden;
-    }
 
     &[data-empty="true"] {
       color: color.$gray-500;

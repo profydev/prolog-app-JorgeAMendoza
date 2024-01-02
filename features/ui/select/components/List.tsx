@@ -63,7 +63,12 @@ export const List = ({
   }, [isOpen, setIsOpen, setSelected, selected, options]);
 
   return (
-    <ul id={`${groupName}Id`} ref={list}>
+    <ul
+      id={`${groupName}Id`}
+      ref={list}
+      className={style.list}
+      data-open={isOpen}
+    >
       <>
         {options.map((option) => (
           <li
@@ -76,6 +81,7 @@ export const List = ({
                 setSelected(option);
                 setIsOpen(false);
               }}
+              className={style.itemLabel}
             >
               {option.name}
               <input
@@ -87,6 +93,8 @@ export const List = ({
                 }}
                 checked={option.value === selected.value}
               />
+              {/* eslint-disable-next-line */}
+              <img src="/icons/check-md.svg" alt="" className={style.check} />
             </label>
           </li>
         ))}
