@@ -38,6 +38,10 @@
   padding: space.$s3 space.$s3;
   position: relative;
 
+  &:hover {
+    background-color: color.$primary-25;
+  }
+
   &:last-of-type {
     border-radius: 0 0 8px 8px;
   }

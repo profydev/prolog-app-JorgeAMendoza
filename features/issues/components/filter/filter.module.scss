@@ -17,10 +17,6 @@
 
 .filterSelect {
   width: 100%;
-  border: 1px solid color.$gray-300;
-  border-radius: 8px;
-  position: relative;
-  height: 44px;
 
   @media screen and (min-width: breakpoint.$tablet) {
     width: -moz-fit-content;
@@ -93,9 +89,4 @@
   color: color.$gray-900;
   margin-left: 0.4em;
   background-color: #fff;
-}
-
-.filterInput:focus-within,
-.filterSelect:focus-within {
-  border: 1px solid color.$gray-500;
 }

@@ -2,6 +2,7 @@ import { Level, Status } from "@api/issues.types";
 import { useFilter } from "../context/filter-context";
 import { useEffect, useState } from "react";
 import styles from "./filter.module.scss";
+import { Select } from "@features/ui";
 
 interface FilterProps {
   navigateToPage: (
@@ -11,6 +12,17 @@ interface FilterProps {
     projectName: string,
   ) => void;
 }
+
+const StatusOptions = [
+  { name: "Unresolved", value: "open" },
+  { name: "Resolved", value: "resolved" },
+];
+
+const LevelOptions = [
+  { name: "Error", value: "error" },
+  { name: "Warning", value: "warning" },
+  { name: "Info", value: "info" },
+];
 
 export function Filter({ navigateToPage }: FilterProps) {
   const { setStatus, setLevel, setProjectName, status, level, projectName } =
@@ -33,46 +45,48 @@ export function Filter({ navigateToPage }: FilterProps) {
         navigateToPage(1, status, level, name);
       }}
     >
-      <label
-        aria-label="Filter status by 'unresolved' or 'resolved'"
-        className={styles.filterSelect}
-      >
-        <select
-          onChange={(e) => {
-            const status = e.target.value as Status;
-            if (setStatus) setStatus(status);
-            navigateToPage(1, status, level, projectName);
+      <div className={styles.filterSelect}>
+        <Select
+          options={StatusOptions}
+          action={(option) => {
+            if (setStatus) setStatus(option as Status);
+            navigateToPage(1, option as Status, level, projectName);
           }}
-          value={status}
-          data-cy="issueStatusFilter"
-          data-active={status !== ""}
-        >
-          <option value="">State</option>
-          <option value="open">Unresolved</option>
-          <option value="resolved">Resolved</option>
-        </select>
-      </label>
-
-      <label
-        aria-label="Filter level by 'error', 'warning', or 'info'"
-        className={styles.filterSelect}
-      >
-        <select
-          onChange={(e) => {
-            const level = e.target.value as Level;
-            if (setLevel) setLevel(level);
-            navigateToPage(1, status, level, projectName);
+          ariaText="Filter status by 'unresolved' or 'resolved'"
+          groupName="issueStatusFilter"
+          placeholder="State"
+          hasEmpty={true}
+          defaultSelected={
+            status === "open"
+              ? StatusOptions[0]
+              : status === "resolved"
+              ? StatusOptions[1]
+              : undefined
+          }
+        />
+      </div>
+      <div className={styles.filterSelect}>
+        <Select
+          options={LevelOptions}
+          action={(option) => {
+            if (setLevel) setLevel(option as Level);
+            navigateToPage(1, option as Status, level, projectName);
           }}
-          value={level}
-          data-cy="issueLevelFilter"
-          data-active={level !== ""}
-        >
-          <option value="">Level</option>
-          <option value="error">Error</option>
-          <option value="warning">Warning</option>
-          <option value="info">Info</option>
-        </select>
-      </label>
+          ariaText="Filter status by 'error', 'warning', or 'info'"
+          groupName="issueLevelFilter"
+          placeholder="Level"
+          hasEmpty={true}
+          defaultSelected={
+            level === "error"
+              ? StatusOptions[0]
+              : level === "warning"
+              ? StatusOptions[1]
+              : level === "info"
+              ? StatusOptions[2]
+              : undefined
+          }
+        />
+      </div>
       <label aria-label="Filter by project name" className={styles.filterInput}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/icons/search.svg" alt="" />
