@@ -3,6 +3,7 @@ import { useFilter } from "../context/filter-context";
 import { useEffect, useState } from "react";
 import styles from "./filter.module.scss";
 import { Select } from "@features/ui";
+import { Input } from "@features/ui";
 
 interface FilterProps {
   navigateToPage: (
@@ -71,20 +72,16 @@ export function Filter({ navigateToPage }: FilterProps) {
           placeholder="Level"
           hasEmpty={true}
           value={level}
-        />
+        ></Select>
       </div>
-      <label aria-label="Filter by project name" className={styles.filterInput}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icons/search.svg" alt="" />
-        <input
-          type="text"
-          maxLength={25}
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          data-cy="issueProjectNameFilter"
-          placeholder="Project Name"
-        />
-      </label>
+      <Input
+        maxLength={25}
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        data-cy="issueProjectNameFilter"
+        placeholder="Project Name"
+        ariaText="Filter by project name"
+      />
     </form>
   );
 }
