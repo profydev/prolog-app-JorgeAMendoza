@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./select.module.scss";
 import { useClickOutside } from "@features/hooks";
 import { List } from "./components/List";
@@ -11,9 +11,9 @@ export interface Option {
 interface SelectProps {
   options: Option[];
   action: (value: string) => void;
+  value: string;
   ariaText: string;
   groupName: string;
-  defaultSelected?: Option;
   hasEmpty?: boolean;
   label?: string;
   placeholder?: string;
@@ -27,7 +27,7 @@ interface SelectProps {
 export const Select = ({
   action,
   options,
-  defaultSelected,
+  value,
   groupName,
   ariaText,
   placeholder = "Select",
@@ -39,22 +39,33 @@ export const Select = ({
   error,
   errorText,
 }: SelectProps) => {
-  const [value, setValue] = useState<string>(defaultSelected?.value || "");
-  const [selected, setSelected] = useState<Option>(
-    defaultSelected || ({} as Option),
-  );
+  const [selected, setSelected] = useState<Option | null>(() => {
+    const selectedOption = options.find((option) => option.value === value);
+    return selectedOption || null;
+  });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
     if (isOpen === false) return;
     setIsOpen(false);
   });
+  const lastValue = useRef<null | string>(null);
 
   useEffect(() => {
-    if (isOpen || value === selected.value) {
+    if (isOpen || selected === null || value === selected?.value) {
       return;
     }
 
-    setValue(selected.value);
+    if (
+      (value === "" && lastValue.current === "" && selected?.value !== "") ||
+      (value === "" &&
+        lastValue.current !== null &&
+        lastValue.current !== selected.value)
+    ) {
+      setSelected(null);
+      lastValue.current = null;
+      return;
+    }
+    lastValue.current = value;
     action(selected.value);
   }, [isOpen, selected, value, action]);
 
@@ -71,12 +82,12 @@ export const Select = ({
           aria-haspopup="listbox"
           aria-label={ariaText}
           disabled={disabled}
-          data-empty={!selected.value}
+          data-empty={!selected?.value}
           data-error={error}
         >
           {/* eslint-disable-next-line */}
           {icon ? <img src={icon} alt="" /> : null}
-          {!selected.name || selected.value === ""
+          {!selected?.name || selected?.value === ""
             ? placeholder
             : selected.name}
           {/* eslint-disable-next-line */}

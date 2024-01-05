@@ -5,7 +5,7 @@ import style from "./List.module.scss";
 interface ListProps {
   groupName: string;
   options: Option[];
-  selected: Option;
+  selected: Option | null;
   setSelected: React.Dispatch<Option>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
@@ -24,7 +24,7 @@ export const List = ({
     const selectList = list.current;
     if (isOpen) {
       const selectedInput = selectList?.querySelector<HTMLInputElement>(
-        `input[value="${selected.value}"]`,
+        `input[value="${selected?.value}"]`,
       );
       const firstInput = selectList?.querySelector<HTMLInputElement>(
         "input:first-of-type",
@@ -74,7 +74,7 @@ export const List = ({
           <li
             className={style.selectOption}
             key={option.name}
-            data-active={option.value === selected.value}
+            data-active={option.value === selected?.value}
           >
             <label
               onMouseDown={() => {
@@ -91,7 +91,7 @@ export const List = ({
                 onChange={() => {
                   setSelected(option);
                 }}
-                checked={option.value === selected.value}
+                checked={option.value === selected?.value}
               />
               {/* eslint-disable-next-line */}
               <img src="/icons/check-md.svg" alt="" className={style.check} />

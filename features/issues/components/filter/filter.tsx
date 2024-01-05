@@ -56,13 +56,7 @@ export function Filter({ navigateToPage }: FilterProps) {
           groupName="issueStatusFilter"
           placeholder="State"
           hasEmpty={true}
-          defaultSelected={
-            status === "open"
-              ? StatusOptions[0]
-              : status === "resolved"
-              ? StatusOptions[1]
-              : undefined
-          }
+          value={status}
         />
       </div>
       <div className={styles.filterSelect}>
@@ -70,21 +64,13 @@ export function Filter({ navigateToPage }: FilterProps) {
           options={LevelOptions}
           action={(option) => {
             if (setLevel) setLevel(option as Level);
-            navigateToPage(1, option as Status, level, projectName);
+            navigateToPage(1, status, option as Level, projectName);
           }}
           ariaText="Filter status by 'error', 'warning', or 'info'"
           groupName="issueLevelFilter"
           placeholder="Level"
           hasEmpty={true}
-          defaultSelected={
-            level === "error"
-              ? StatusOptions[0]
-              : level === "warning"
-              ? StatusOptions[1]
-              : level === "info"
-              ? StatusOptions[2]
-              : undefined
-          }
+          value={level}
         />
       </div>
       <label aria-label="Filter by project name" className={styles.filterInput}>

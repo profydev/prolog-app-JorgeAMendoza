@@ -13,7 +13,6 @@ export default {
 
 const Template: StoryFn<typeof Select> = ({
   options,
-  defaultSelected,
   groupName,
   ariaText,
   placeholder,
@@ -23,11 +22,11 @@ const Template: StoryFn<typeof Select> = ({
   hintText,
   error,
   errorText,
+  value,
 }) => (
   <div style={{ padding: 50, width: "320px" }}>
     <Select
       options={options}
-      defaultSelected={defaultSelected}
       groupName={groupName}
       ariaText={ariaText}
       action={() => {
@@ -40,6 +39,7 @@ const Template: StoryFn<typeof Select> = ({
       hintText={hintText}
       error={error}
       errorText={errorText}
+      value={value}
     />
   </div>
 );
@@ -54,8 +54,6 @@ const options = [
   { name: "Drew Cano", value: "Drew Cano" },
 ];
 
-const defaultValue = { name: "Olivia Rhye", value: "Olivia Rhye" };
-
 export const Empty = Template.bind({});
 Empty.args = {
   options,
@@ -67,7 +65,6 @@ Empty.args = {
 export const WithDefault = Template.bind({});
 WithDefault.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -76,7 +73,6 @@ WithDefault.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
   placeholder: "Select team member",
@@ -95,7 +91,6 @@ EmptyWithIcon.args = {
 export const WithDefaultIcon = Template.bind({});
 WithDefaultIcon.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -105,7 +100,6 @@ WithDefaultIcon.args = {
 export const WithIconDisabled = Template.bind({});
 WithIconDisabled.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
   placeholder: "Select team member",
@@ -125,7 +119,6 @@ WithLabel.args = {
 export const WithLabelSelected = Template.bind({});
 WithLabelSelected.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -155,7 +148,6 @@ WithHintText.args = {
 export const WithHintTextSelected = Template.bind({});
 WithHintTextSelected.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -174,7 +166,6 @@ WithErrorEmpty.args = {
 export const WithErrorSelected = Template.bind({});
 WithErrorSelected.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -184,7 +175,6 @@ WithErrorSelected.args = {
 export const WithErrorDisabled = Template.bind({});
 WithErrorDisabled.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
   placeholder: "Select team member",
@@ -205,7 +195,6 @@ WithErrorEmptyIcon.args = {
 export const WithErrorSelectedIcon = Template.bind({});
 WithErrorSelectedIcon.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -216,7 +205,6 @@ WithErrorSelectedIcon.args = {
 export const WithErrorDisabledIcon = Template.bind({});
 WithErrorDisabledIcon.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
   placeholder: "Select team member",
@@ -238,7 +226,6 @@ WithErrorEmptyMessage.args = {
 export const WithErrorSelectedMessage = Template.bind({});
 WithErrorSelectedMessage.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
@@ -249,7 +236,6 @@ WithErrorSelectedMessage.args = {
 export const WithErrorDisabledMessage = Template.bind({});
 WithErrorDisabledMessage.args = {
   options,
-  defaultSelected: defaultValue,
   groupName: "disabled",
   ariaText: "Disabled",
   placeholder: "Select team member",
