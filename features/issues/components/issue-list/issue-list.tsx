@@ -17,11 +17,11 @@ export function IssueList() {
 
   useEffect(() => {
     const routerQuery = router.query;
-    const status = routerQuery.status ? (routerQuery.status as Status) : "";
-    const level = routerQuery.level ? (routerQuery.level as Level) : "";
+    const status = routerQuery.status ? (routerQuery.status as Status) : null;
+    const level = routerQuery.level ? (routerQuery.level as Level) : null;
     const projectName = routerQuery.project
       ? (routerQuery.project as string)
-      : "";
+      : null;
     if (setStatus) setStatus(status);
     if (setLevel) setLevel(level);
     if (setProjectName) setProjectName(projectName);
@@ -30,9 +30,9 @@ export function IssueList() {
   const page = Number(router.query.page || 1);
   const navigateToPage = (
     newPage: number,
-    status: Status,
-    level: Level,
-    projectName: string,
+    status: Status | null,
+    level: Level | null,
+    projectName: string | null,
   ) => {
     const query: Query = { page: newPage };
     if (status) query.status = status;
@@ -45,7 +45,12 @@ export function IssueList() {
     });
   };
 
-  const issuesPage = useGetIssues(page, status, level, projectName);
+  const issuesPage = useGetIssues(
+    page,
+    status || "",
+    level || "",
+    projectName || "",
+  );
   const projects = useGetProjects();
 
   if (projects.isLoading || issuesPage.isLoading) {
@@ -53,12 +58,10 @@ export function IssueList() {
   }
 
   if (projects.isError) {
-    console.error(projects.error);
     return <div>Error loading projects: {projects.error.message}</div>;
   }
 
   if (issuesPage.isError) {
-    console.error(issuesPage.error);
     return <div>Error loading issues: {issuesPage.error.message}</div>;
   }
 

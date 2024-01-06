@@ -7,9 +7,9 @@ import { Input } from "@features/ui";
 interface FilterProps {
   navigateToPage: (
     newPage: number,
-    status: Status,
-    Level: Level,
-    projectName: string,
+    status: Status | null,
+    Level: Level | null,
+    projectName: string | null,
   ) => void;
 }
 
@@ -44,7 +44,7 @@ export function Filter({ navigateToPage }: FilterProps) {
             if (setStatus) setStatus(status);
             navigateToPage(1, status, level, projectName);
           }}
-          value={status}
+          value={status || ""}
           data-cy="issueStatusFilter"
           data-active={status !== ""}
         >
@@ -64,7 +64,7 @@ export function Filter({ navigateToPage }: FilterProps) {
             if (setLevel) setLevel(level);
             navigateToPage(1, status, level, projectName);
           }}
-          value={level}
+          value={level || ""}
           data-cy="issueLevelFilter"
           data-active={level !== ""}
         >
@@ -77,7 +77,7 @@ export function Filter({ navigateToPage }: FilterProps) {
       <Input
         maxLength={25}
         onChange={(e) => setName(e.target.value)}
-        value={name}
+        value={name || ""}
         data-cy="issueProjectNameFilter"
         placeholder="Project Name"
         ariaText="Filter by project name"
