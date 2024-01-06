@@ -11,7 +11,7 @@ export interface Option {
 interface SelectProps {
   options: Option[];
   action: (value: string) => void;
-  value: string;
+  value: string | null;
   ariaText: string;
   groupName: string;
   hasEmpty?: boolean;

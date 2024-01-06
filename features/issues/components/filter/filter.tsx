@@ -8,9 +8,9 @@ import { Input } from "@features/ui";
 interface FilterProps {
   navigateToPage: (
     newPage: number,
-    status: Status,
-    Level: Level,
-    projectName: string,
+    status: Status | null,
+    Level: Level | null,
+    projectName: string | null,
   ) => void;
 }
 
@@ -77,7 +77,7 @@ export function Filter({ navigateToPage }: FilterProps) {
       <Input
         maxLength={25}
         onChange={(e) => setName(e.target.value)}
-        value={name}
+        value={name || ""}
         data-cy="issueProjectNameFilter"
         placeholder="Project Name"
         ariaText="Filter by project name"
