@@ -50,7 +50,6 @@ export function Filter({ navigateToPage }: FilterProps) {
         <Select
           options={StatusOptions}
           action={(option) => {
-            if (setStatus) setStatus(option as Status);
             navigateToPage(1, option as Status, level, projectName);
           }}
           ariaText="Filter status by 'unresolved' or 'resolved'"
@@ -64,7 +63,6 @@ export function Filter({ navigateToPage }: FilterProps) {
         <Select
           options={LevelOptions}
           action={(option) => {
-            if (setLevel) setLevel(option as Level);
             navigateToPage(1, status, option as Level, projectName);
           }}
           ariaText="Filter status by 'error', 'warning', or 'info'"

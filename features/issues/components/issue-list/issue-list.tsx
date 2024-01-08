@@ -17,11 +17,11 @@ export function IssueList() {
 
   useEffect(() => {
     const routerQuery = router.query;
-    const status = routerQuery.status ? (routerQuery.status as Status) : null;
-    const level = routerQuery.level ? (routerQuery.level as Level) : null;
-    const projectName = routerQuery.project
-      ? (routerQuery.project as string)
-      : null;
+    const status =
+      "status" in routerQuery ? (routerQuery.status as Status) : null;
+    const level = "level" in routerQuery ? (routerQuery.level as Level) : null;
+    const projectName =
+      "projct" in routerQuery ? (routerQuery.project as string) : null;
     if (setStatus) setStatus(status);
     if (setLevel) setLevel(level);
     if (setProjectName) setProjectName(projectName);
@@ -35,9 +35,9 @@ export function IssueList() {
     projectName: string | null,
   ) => {
     const query: Query = { page: newPage };
-    if (status) query.status = status;
-    if (level) query.level = level;
-    if (projectName) query.project = projectName;
+    if (status !== null) query.status = status;
+    if (level !== null) query.level = level;
+    if (projectName !== null) query.project = projectName;
 
     router.push({
       pathname: router.pathname,

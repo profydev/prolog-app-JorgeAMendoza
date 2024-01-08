@@ -6,7 +6,7 @@ interface ListProps {
   groupName: string;
   options: Option[];
   selected: Option | null;
-  setSelected: React.Dispatch<Option>;
+  setSelected: React.Dispatch<Option | null>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
 }
@@ -48,7 +48,7 @@ export const List = ({
             (option) => option.value === selectedValue,
           );
 
-          setSelected(targetOption || ({} as Option));
+          setSelected(targetOption || null);
           setIsOpen(false);
           break;
         }
