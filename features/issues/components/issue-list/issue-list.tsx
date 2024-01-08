@@ -21,7 +21,7 @@ export function IssueList() {
       "status" in routerQuery ? (routerQuery.status as Status) : null;
     const level = "level" in routerQuery ? (routerQuery.level as Level) : null;
     const projectName =
-      "projct" in routerQuery ? (routerQuery.project as string) : null;
+      "project" in routerQuery ? (routerQuery.project as string) : null;
     if (setStatus) setStatus(status);
     if (setLevel) setLevel(level);
     if (setProjectName) setProjectName(projectName);
