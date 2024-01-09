@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import type { Option } from "../Select";
 import style from "./List.module.scss";
 
@@ -9,6 +9,8 @@ interface ListProps {
   setSelected: React.Dispatch<Option | null>;
   isOpen: boolean;
   setIsOpen: React.Dispatch<boolean>;
+  action: (value: string) => void;
+  lastSelected: MutableRefObject<string | null>;
 }
 
 export const List = ({
@@ -18,8 +20,11 @@ export const List = ({
   setSelected,
   isOpen,
   setIsOpen,
+  action,
+  lastSelected,
 }: ListProps) => {
   const list = useRef<HTMLUListElement>(null);
+  console.log(lastSelected);
   useEffect(() => {
     const selectList = list.current;
     if (isOpen) {
@@ -48,8 +53,18 @@ export const List = ({
             (option) => option.value === selectedValue,
           );
 
+          if (
+            targetOption?.value === lastSelected.current ||
+            (targetOption?.value === "" && lastSelected.current === null)
+          ) {
+            setIsOpen(false);
+            return;
+          }
           setSelected(targetOption || null);
+          lastSelected.current =
+            targetOption === undefined ? null : targetOption.value;
           setIsOpen(false);
+          action(targetOption?.value || "");
           break;
         }
       }
@@ -60,7 +75,7 @@ export const List = ({
     return () => {
       selectList?.removeEventListener("keydown", handleKey);
     };
-  }, [isOpen, setIsOpen, setSelected, selected, options]);
+  }, [isOpen, setIsOpen, setSelected, selected, options, action, lastSelected]);
 
   return (
     <ul
@@ -78,8 +93,17 @@ export const List = ({
           >
             <label
               onMouseDown={() => {
+                if (
+                  option.value === selected?.value ||
+                  (option.value === "" && lastSelected.current === null)
+                ) {
+                  setIsOpen(false);
+                  return;
+                }
+                lastSelected.current = option.value;
                 setSelected(option);
                 setIsOpen(false);
+                action(option.value);
               }}
               className={style.itemLabel}
             >

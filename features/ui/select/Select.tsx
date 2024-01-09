@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./select.module.scss";
 import { useClickOutside } from "@features/hooks";
 import { List } from "./components/List";
@@ -49,13 +49,16 @@ export const Select = ({
     if (isOpen === false) return;
     setIsOpen(false);
   });
+  const lastSelected = useRef<string | null>(
+    selected === null ? null : selected.value,
+  );
 
   useEffect(() => {
-    if (isOpen || selected === null || value === selected?.value) {
-      return;
+    if (value === null) {
+      setSelected(null);
+      lastSelected.current = null;
     }
-    action(selected.value);
-  }, [isOpen, selected, value, action]);
+  }, [value]);
 
   return (
     <div className={style.select} ref={ref}>
@@ -94,6 +97,8 @@ export const Select = ({
           setSelected={setSelected}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
+          action={action}
+          lastSelected={lastSelected}
         />
       </div>
     </div>
