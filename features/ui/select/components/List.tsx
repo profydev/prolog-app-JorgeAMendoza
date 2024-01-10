@@ -60,7 +60,7 @@ export const List = ({
             setIsOpen(false);
             return;
           }
-          setSelected(targetOption || null);
+          // setSelected(targetOption || null);
           lastSelected.current =
             targetOption === undefined ? null : targetOption.value;
           setIsOpen(false);
@@ -78,7 +78,12 @@ export const List = ({
   }, [isOpen, setIsOpen, setSelected, selected, options, action, lastSelected]);
 
   useEffect(() => {
-    if (isOpen || selected === null || selected?.value === lastSelected.current)
+    if (
+      isOpen ||
+      selected === null ||
+      selected?.value === lastSelected.current ||
+      (lastSelected.current === null && selected.value === "")
+    )
       return;
     lastSelected.current = selected.value || null;
     action(selected.value);

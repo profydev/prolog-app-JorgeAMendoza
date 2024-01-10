@@ -75,6 +75,7 @@ export const Select = ({
           disabled={disabled}
           data-empty={!selected?.value}
           data-error={error}
+          data-cy={groupName}
         >
           {/* eslint-disable-next-line */}
           {icon ? <img src={icon} alt="" /> : null}
