@@ -68,6 +68,7 @@ WithDefault.args = {
   groupName: "default",
   ariaText: "Default",
   placeholder: "Select team member",
+  value: "Olivia Rhye",
 };
 
 export const Disabled = Template.bind({});
@@ -95,6 +96,7 @@ WithDefaultIcon.args = {
   ariaText: "Default",
   placeholder: "Select team member",
   icon: "/icons/user.svg",
+  value: "Olivia Rhye",
 };
 
 export const WithIconDisabled = Template.bind({});
@@ -124,6 +126,7 @@ WithLabelSelected.args = {
   placeholder: "Select team member",
   label: "Team member",
   icon: "/icons/user.svg",
+  value: "Olivia Rhye",
 };
 
 export const WithLabelDisabled = Template.bind({});
@@ -152,6 +155,7 @@ WithHintTextSelected.args = {
   ariaText: "Default",
   placeholder: "Select team member",
   hintText: "This is a hint text to help user.",
+  value: "Olivia Rhye",
 };
 
 export const WithErrorEmpty = Template.bind({});
@@ -170,6 +174,7 @@ WithErrorSelected.args = {
   ariaText: "Default",
   placeholder: "Select team member",
   error: true,
+  value: "Olivia Rhye",
 };
 
 export const WithErrorDisabled = Template.bind({});
@@ -200,6 +205,7 @@ WithErrorSelectedIcon.args = {
   placeholder: "Select team member",
   error: true,
   icon: "/icons/user.svg",
+  value: "Olivia Rhye",
 };
 
 export const WithErrorDisabledIcon = Template.bind({});
@@ -231,6 +237,7 @@ WithErrorSelectedMessage.args = {
   placeholder: "Select team member",
   error: true,
   errorText: "This is a error message.",
+  value: "Olivia Rhye",
 };
 
 export const WithErrorDisabledMessage = Template.bind({});

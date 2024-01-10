@@ -24,7 +24,7 @@ export const List = ({
   lastSelected,
 }: ListProps) => {
   const list = useRef<HTMLUListElement>(null);
-  console.log(lastSelected);
+
   useEffect(() => {
     const selectList = list.current;
     if (isOpen) {
@@ -76,6 +76,13 @@ export const List = ({
       selectList?.removeEventListener("keydown", handleKey);
     };
   }, [isOpen, setIsOpen, setSelected, selected, options, action, lastSelected]);
+
+  useEffect(() => {
+    if (isOpen || selected === null || selected?.value === lastSelected.current)
+      return;
+    lastSelected.current = selected.value || null;
+    action(selected.value);
+  }, [isOpen, selected, action, lastSelected]);
 
   return (
     <ul
