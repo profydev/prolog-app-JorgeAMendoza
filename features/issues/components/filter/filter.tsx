@@ -38,6 +38,7 @@ export function Filter({ navigateToPage }: FilterProps) {
       className={styles.filter}
       onSubmit={(e) => {
         e.preventDefault();
+        if (name === projectName) return;
         if (setStatus && setLevel && setProjectName) {
           setStatus(status);
           setLevel(level);

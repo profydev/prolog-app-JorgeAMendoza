@@ -60,7 +60,6 @@ export const List = ({
             setIsOpen(false);
             return;
           }
-          // setSelected(targetOption || null);
           lastSelected.current =
             targetOption === undefined ? null : targetOption.value;
           setIsOpen(false);
