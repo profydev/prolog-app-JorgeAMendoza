@@ -54,9 +54,27 @@ const options = [
   { name: "Drew Cano", value: "Drew Cano" },
 ];
 
+const optionsWithIcon = [
+  { name: "Phoenix Baker", value: "Phoenix Baker", img: "/icons/user.svg" },
+  { name: "Olivia Rhye", value: "Olivia Rhye", img: "/icons/user.svg" },
+  { name: "Lana Steiner", value: "Lana Steiner", img: "/icons/user.svg" },
+  { name: "Demi Wilkinson", value: "Demi Wilkinson", img: "/icons/user.svg" },
+  { name: "Candice Wu", value: "Candice Wu", img: "/icons/user.svg" },
+  { name: "Natali Wong", value: "Natali Wong", img: "/icons/user.svg" },
+  { name: "Drew Cano", value: "Drew Cano", img: "/icons/user.svg" },
+];
+
 export const Empty = Template.bind({});
 Empty.args = {
   options,
+  groupName: "empty",
+  ariaText: "Empty",
+  placeholder: "Select team member",
+};
+
+export const EmptyItemWithIcon = Template.bind({});
+EmptyItemWithIcon.args = {
+  options: optionsWithIcon,
   groupName: "empty",
   ariaText: "Empty",
   placeholder: "Select team member",
@@ -83,6 +101,15 @@ Disabled.args = {
 export const EmptyWithIcon = Template.bind({});
 EmptyWithIcon.args = {
   options,
+  groupName: "empty",
+  ariaText: "Empty",
+  placeholder: "Select team member",
+  icon: "/icons/user.svg",
+};
+
+export const EmptyWithIconItemsWithIcon = Template.bind({});
+EmptyWithIconItemsWithIcon.args = {
+  options: optionsWithIcon,
   groupName: "empty",
   ariaText: "Empty",
   placeholder: "Select team member",

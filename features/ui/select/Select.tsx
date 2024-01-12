@@ -6,6 +6,7 @@ import { List } from "./components/List";
 export interface Option {
   name: string;
   value: string;
+  img?: string;
 }
 
 interface SelectProps {

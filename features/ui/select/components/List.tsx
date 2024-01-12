@@ -118,6 +118,8 @@ export const List = ({
               }}
               className={style.itemLabel}
             >
+              {/* eslint-disable-next-line */}
+              {option.img ? <img src={option.img} alt="" /> : null}
               {option.name}
               <input
                 type="radio"
