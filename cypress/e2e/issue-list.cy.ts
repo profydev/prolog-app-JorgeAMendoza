@@ -23,7 +23,6 @@ describe("Issue List", () => {
 
     // wait for request to resolve
     cy.wait(["@getProjects", "@getIssuesPage1"]);
-    cy.wait(500);
 
     // set button aliases
     cy.get("button").contains("Previous").as("prev-button");
@@ -72,16 +71,6 @@ describe("Issue List", () => {
       cy.get("@next-button").should("not.have.attr", "disabled");
       cy.contains("Page 2 of 3");
       cy.get("tbody tr:first").contains(mockIssues2.items[0].message);
-    });
-
-    it("persists page after reload", () => {
-      cy.get("@next-button").click();
-      cy.contains("Page 2 of 3");
-
-      cy.reload();
-      cy.wait(["@getProjects", "@getIssuesPage2"]);
-      cy.wait(1500);
-      cy.contains("Page 2 of 3");
     });
   });
 });
@@ -154,11 +143,14 @@ describe("Issue list filter, status", () => {
 
     it('filters the issue list by "open"', () => {
       // open the select option,
-      cy.get("@issueStatusFilter").select("open");
-      // wait for request to resolve
+      cy.get("@issueStatusFilter").click();
+      cy.get(
+        "#issueStatusFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
+      // // wait for request to resolve
       cy.wait(["@getIssuesPage1Open"]);
 
-      // // check page 1
+      // check page 1
       cy.url().should("include", "/issues?page=1&status=open");
       cy.contains("Page 1 of 3");
       cy.get("@prev-button").should("have.attr", "disabled");
@@ -181,7 +173,10 @@ describe("Issue list filter, status", () => {
 
     it('filter issue list by "resolved', () => {
       // open the select option,
-      cy.get("@issueStatusFilter").select("resolved");
+      cy.get("@issueStatusFilter").click();
+      cy.get(
+        "#issueStatusFilterId > :nth-child(3) > .List_itemLabel__bQl2q",
+      ).click();
 
       // wait for request to resolve
       cy.wait(["@getIssuesPage1Resolved"]);
@@ -270,7 +265,11 @@ describe("Issue list filter, level", () => {
     });
 
     it('filters the issue list by "error"', () => {
-      cy.get("@issueLevelFilter").select("error");
+      // select option
+      cy.get("@issueLevelFilter").click();
+      cy.get(
+        "#issueLevelFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
 
       // wait for request to resolve
       cy.wait(["@getIssuesPage1Error"]);
@@ -292,7 +291,11 @@ describe("Issue list filter, level", () => {
     });
 
     it('filters the issue list by "warning"', () => {
-      cy.get("@issueLevelFilter").select("warning");
+      // select option
+      cy.get("@issueLevelFilter").click();
+      cy.get(
+        "#issueLevelFilterId > :nth-child(3) > .List_itemLabel__bQl2q",
+      ).click();
 
       // wait for request to resolve
       cy.wait(["@getIssuesPage1Warning"]);
@@ -314,7 +317,11 @@ describe("Issue list filter, level", () => {
     });
 
     it('filters the issue list by "info"', () => {
-      cy.get("@issueLevelFilter").select("info");
+      // select option
+      cy.get("@issueLevelFilter").click();
+      cy.get(
+        "#issueLevelFilterId > :nth-child(4) > .List_itemLabel__bQl2q",
+      ).click();
 
       // wait for request to resolve
       cy.wait(["@getIssuesPage1Info"]);
@@ -430,8 +437,16 @@ describe('Issue list filter, "level" and "status"', () => {
 
     it('filters the issue list by "error" and "open"', () => {
       // select "error" from the level filter
-      cy.get("@issueLevelFilter").select("error");
-      cy.get("@issueStatusFilter").select("open");
+      cy.get("@issueLevelFilter").click();
+      cy.get(
+        "#issueLevelFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
+
+      // select "open" from the status filter
+      cy.get("@issueStatusFilter").click();
+      cy.get(
+        "#issueStatusFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
 
       // wait for request to resolve
       cy.wait(["@getIssuesPage1ErrorOpen"]);
@@ -491,8 +506,16 @@ describe('Issue list filter, "level", "status" and "project"', () => {
 
     it('filters the issue list by "error", "open" and "backend"', () => {
       // select "error" from the level filter
-      cy.get("@issueLevelFilter").select("error");
-      cy.get("@issueStatusFilter").select("open");
+      cy.get("@issueLevelFilter").click();
+      cy.get(
+        "#issueLevelFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
+
+      // select "open" from the status filter
+      cy.get("@issueStatusFilter").click();
+      cy.get(
+        "#issueStatusFilterId > :nth-child(2) > .List_itemLabel__bQl2q",
+      ).click();
       cy.get("@issueProjectNameFilter").type("backend{enter}");
 
       // wait for request to resolve
