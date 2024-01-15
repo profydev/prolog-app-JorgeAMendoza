@@ -4,4 +4,5 @@ export * from "./error-message";
 export * from "./loading";
 export * from "./contact-modal";
 export * from "./Testimonials";
+export * from "./select";
 export * from "./input";

@@ -28,9 +28,9 @@ export function NoIssues({ navigateToPage }: NoIssuesProps) {
         type="button"
         size={ButtonSize.lg}
         onClick={() => {
-          if (setStatus) setStatus("");
-          if (setLevel) setLevel("");
-          if (setProjectName) setProjectName("");
+          if (setStatus) setStatus(null);
+          if (setLevel) setLevel(null);
+          if (setProjectName) setProjectName(null);
           navigateToPage(1, "", "", "");
         }}
       >
